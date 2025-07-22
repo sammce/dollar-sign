@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Budgeting App
 
-## Getting Started
+## Table of Contents
 
-First, run the development server:
+- [Overview](#overview)
+- [Features](#features)
+  - [Budget tracking](#budget-tracking)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## [Overview](#overview)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## [Installation](#installation)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To run the app locally, follow these steps:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Clone the repository to your local machine.
+2. Navigate to the project directory.
+3. Install the required dependencies by running `pnpm install` (or `npm install` for the boomers).
+4. Start the development server by running `pnpm dev`.
 
-## Learn More
+## [Features](#features)
 
-To learn more about Next.js, take a look at the following resources:
+### Budget tracking
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Input your savings/income in different currencies
+- Track monthly expenses (subscriptions, groceries, etc.)
+- Update values and charts on monthly basis
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Commodity tracking
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Input your commodities
+- Track their values
+- Also add in inflation data for fiat currencies
