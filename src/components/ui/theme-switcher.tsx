@@ -36,14 +36,7 @@ function ThemeSwitcher({ className }: { className?: string }) {
   const [icon, setIcon] = useState<React.ReactNode>(null);
 
   useEffect(() => {
-    let currentIcon = themeIcons[theme];
-
-    if (theme === "system") {
-      // If the theme is set to system, show the icon based on system preferences
-      currentIcon = darkPreferred() ? themeIcons.dark : themeIcons.light;
-    }
-
-    setIcon(currentIcon);
+    setIcon(themeIcons[theme]);
   }, [theme]);
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {

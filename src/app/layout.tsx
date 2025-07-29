@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
-import { Geist, Geist_Mono } from "next/font/google";
+import { IBM_Plex_Sans, Geist_Mono } from "next/font/google";
 
 import Layout from "@/components/layout";
 
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const ibm = IBM_Plex_Sans({
+  variable: "--font-ibm-sans",
   subsets: ["latin"],
 });
 
@@ -26,15 +25,9 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const storedTheme = (await cookies())?.get("theme")?.value;
-
-  const initialTheme = storedTheme === "dark" ? "dark" : "";
-
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${initialTheme} antialiased`}
-      >
+      <body className={`${ibm.variable} ${geistMono.variable} antialiased`}>
         <Layout>{children}</Layout>
       </body>
     </html>

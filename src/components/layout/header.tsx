@@ -3,24 +3,25 @@
 import Link from "next/link";
 import { Separator, ThemeSwitcher } from "@/components/ui";
 import { cn } from "@/lib/utils";
-import { useMotionValueEvent, useScroll } from "motion/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 /**
  * Footer layout component
  */
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const { scrollYProgress } = useScroll();
 
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    const threshold = 0;
+  useEffect(() => {
+    const threshold = 20;
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > threshold);
+    };
 
-    if (latest > threshold && !isScrolled) {
-      setIsScrolled(true);
-    } else if (latest <= threshold && isScrolled) {
-      setIsScrolled(false);
-    }
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   });
 
   return (

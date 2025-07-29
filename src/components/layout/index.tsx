@@ -9,9 +9,13 @@ function Layout({ children }: { children: React.ReactNode }) {
   return (
     <CookiesProvider>
       <ThemeProvider>
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col">
           <Header />
-          <main className="flex-grow">{children}</main>
+          <div className="h-18 py-2"></div>
+          <main className="flex-grow shadow-xl min-h-screen relative bg-background pb-25">
+            {children}
+          </main>
+          <div className="h-40 w-full bg-transparent z-[-2] sticky"></div>
           <Footer />
         </div>
       </ThemeProvider>

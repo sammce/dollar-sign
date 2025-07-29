@@ -8,7 +8,7 @@ export type Theme = "system" | "light" | "dark";
 
 export const ThemeContext = createContext<[Theme, (newTheme: Theme) => void]>([
   "system",
-  () => {},
+  () => { },
 ]);
 
 /**
@@ -24,7 +24,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [{ theme }, setCookie] = useCookies(["theme"]);
 
   useLayoutEffect(() => {
-    if (theme === "system") {
+    const safeTheme = theme || "system";
+
+    if (safeTheme === "system") {
       if (darkPreferred()) {
         applyTheme("dark");
       } else {
@@ -34,7 +36,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       return;
     }
 
-    applyTheme(theme);
+    applyTheme(safeTheme);
   }, [theme]);
 
   const setTheme = useCallback(
@@ -45,7 +47,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   );
 
   const contextValue: [Theme, (newTheme: Theme) => void] = useMemo(
-    () => [theme, setTheme],
+    () => [theme || "system", setTheme],
     [theme, setTheme],
   );
 
