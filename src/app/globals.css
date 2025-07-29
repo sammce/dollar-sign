@@ -210,6 +210,10 @@
   h5 {
     @apply text-lg;
   }
+
+  a {
+    @apply text-sky-600 dark:text-sky-400;
+  }
 }
 
 @layer base {

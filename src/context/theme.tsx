@@ -8,7 +8,7 @@ export type Theme = "system" | "light" | "dark";
 
 export const ThemeContext = createContext<[Theme, (newTheme: Theme) => void]>([
   "system",
-  () => { },
+  () => {},
 ]);
 
 /**

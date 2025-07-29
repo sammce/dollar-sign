@@ -4,7 +4,7 @@ import { useTheme } from "@/hooks";
 import { Button } from "@/components/ui";
 import { Sun, Moon, MonitorCog } from "lucide-react";
 import type { Theme } from "@/context";
-import { cn, darkPreferred } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import {
   DropdownMenu,
   DropdownMenuContent,

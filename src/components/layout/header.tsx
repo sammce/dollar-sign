@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Separator, ThemeSwitcher } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
+import { SocialIcon } from "react-social-icons";
 
 /**
  * Footer layout component
@@ -33,12 +34,20 @@ export default function Header() {
       )}
     >
       <div className="flex gap-8 items-center h-full">
-        <Link href="/" className="mobile-hidden">
+        <Link href="/" className="mobile-hidden text-inherit">
           <h3 className="font-bold">Budgeting App</h3>
         </Link>
         <Separator orientation="vertical" className="mobile-hidden" />
       </div>
       <div className="flex gap-6 items-center">
+        <SocialIcon
+          url="https://github.com/sammce"
+          className="border rounded-full border-neutral-600"
+          target="_blank"
+          bgColor="transparent"
+          fgColor="var(--foreground)"
+          style={{ height: 44, width: 44 }}
+        />
         <ThemeSwitcher className="z-50" />
       </div>
     </header>
