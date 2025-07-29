@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sam's Budgeting App",
-  description: "Stop worrying about your finances and let us do it for you.",
+  title: "Dollar $ign",
+  description: "Stop worrying about your finances and let us worry for you.",
 };
 
 export default async function RootLayout({
