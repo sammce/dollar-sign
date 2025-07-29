@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Separator, ThemeSwitcher } from "@/components/ui";
+import { ThemeSwitcher } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { SocialIcon } from "react-social-icons";
@@ -20,6 +20,8 @@ export default function Header() {
 
     window.addEventListener("scroll", handleScroll);
 
+    handleScroll();
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -29,20 +31,25 @@ export default function Header() {
     <header
       className={cn(
         // Apply shadow to the after element on scroll, this is more performant and looks smoother than adding shadow to element itself
-        "px-6 py-2 border-b dark:border-neutral-700 flex justify-between items-center z-30 h-18 fixed w-full bg-background after:opacity-0 after:transition-opacity not-dark:after:shadow-lg after:w-full after:h-full after:absolute after:left-0 after:-z-10",
-        { "after:opacity-100 border-background": isScrolled },
+        "px-6 py-2 flex justify-between items-center z-30 h-18 fixed w-full after:opacity-0 after:transition-opacity not-dark:after:shadow-sm after:w-full after:h-full after:absolute after:left-0 after:-z-10",
+        {
+          "after:opacity-100 dark:border-b dark:border-border/50 backdrop-blur-2xl bg-background/40":
+            isScrolled,
+        },
       )}
     >
       <div className="flex gap-8 items-center h-full">
-        <Link href="/" className="mobile-hidden text-inherit">
-          <h3 className="font-bold">Budgeting App</h3>
+        <Link href="/" className="text-inherit">
+          <h3 className="font-bold">
+            <span className="mobile-hidden">Dollar $ign</span>
+            <span className="mobile-visible">$</span>
+          </h3>
         </Link>
-        <Separator orientation="vertical" className="mobile-hidden" />
       </div>
       <div className="flex gap-6 items-center">
         <SocialIcon
-          url="https://github.com/sammce"
-          className="border rounded-full border-neutral-600"
+          url="https://github.com/sammce/budget-tool"
+          className="border rounded-full border-border shadow-xs hover:bg-accent/50 transition-colors"
           target="_blank"
           bgColor="transparent"
           fgColor="var(--foreground)"

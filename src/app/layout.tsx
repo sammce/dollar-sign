@@ -3,7 +3,7 @@ import { IBM_Plex_Sans, Geist_Mono } from "next/font/google";
 
 import Layout from "@/components/layout";
 
-import "./globals.css";
+import "./css/globals.css";
 
 const ibm = IBM_Plex_Sans({
   variable: "--font-ibm-sans",
