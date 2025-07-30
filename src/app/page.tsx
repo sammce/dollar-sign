@@ -1,13 +1,13 @@
 "use client";
 
-import { HeroAnimation } from "@/components/atoms";
-import { ShineBorder } from "@/components/magicui/shine-border";
+import { HeroAnimation, SlopedShape } from "@/components/atoms";
 import {
   Button,
   ContainerTextFlip,
   HeroHighlight,
   HoverBorderGradient,
   GlassCard,
+  ShineBorder,
 } from "@/components/ui";
 
 export default function Home() {
@@ -16,12 +16,17 @@ export default function Home() {
       <div className="flex items-center gap-20">
         <div>
           <h1 className="text-center xl:text-left text-6xl xl:text-8xl font-bold min-w-[34rem] xl:min-w-[40rem]">
-            Take control
-            <br /> of your
-            <br />{" "}
+            Take control <br />
+            of your <br />{" "}
             <ContainerTextFlip
-              words={["finances", "subscriptions", "social life", "assets"]}
-              className="mt-5 -pt-1"
+              words={[
+                "shopping",
+                "subscriptions",
+                "lunches",
+                "social life",
+                "assets",
+              ]}
+              className="mt-5 -pt-1 pb-5"
               textClassName="text-6xl xl:text-8xl font-bold"
               interval={4000}
             />
@@ -36,12 +41,12 @@ export default function Home() {
             </HoverBorderGradient>
           </div>
         </div>
-        {/* Skewed */}
         <div className="mobile-hidden   relative min-w-[250px] min-h-[250px]">
-          <GlassCard className="bg-background backdrop-blur-none transform-3d -skew-12 rotate-x-[50deg] min-h-[350px] min-w-[350px] relative">
+          <GlassCard className="bg-background backdrop-blur-none transform-3d -skew-12 rotate-x-[50deg] min-h-[350px] min-w-[350px] relative overflow-hidden">
             <ShineBorder shineColor={["#00FF65", "#00F3BD", "#00FF00"]} />
           </GlassCard>
           <div className="bg-primary/20 absolute w-full h-full -top-[3px] -left-[2px] rounded-xl -z-10 transform-3d -skew-12 rotate-x-[50deg] min-h-[368px] min-w-[362px] rounded-bl-2xl rounded-tr-3xl"></div>
+          <SlopedShape />
           <HeroAnimation className="absolute top-[-100px] left-[20px] w-[350px] h-[350px]" />
         </div>
       </div>

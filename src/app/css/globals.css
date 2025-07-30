@@ -67,17 +67,6 @@
   --color-shadow-color: var(--shadow-color);
   --color-destructive-foreground: var(--destructive-foreground);
   --animate-shine: shine var(--duration) infinite linear;
-  @keyframes shine {
-    0% {
-      background-position: 0% 0%;
-    }
-    50% {
-      background-position: 100% 100%;
-    }
-    to {
-      background-position: 0% 0%;
-    }
-  }
 }
 
 :root {
@@ -193,6 +182,7 @@
   --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
 }
 
+/* Global, base styles */
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -228,16 +218,7 @@
   }
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
+/* Utilities */
 @utility mobile-hidden {
   @apply hidden lg:block;
 }
@@ -276,12 +257,47 @@
   );
 }
 
-@keyframes skeleton {
-  0% {
-    background-position: 150%;
+/* Animations */
+@theme inline {
+  --animate-meteor-effect: meteor 5s linear infinite;
+
+  @keyframes meteor {
+    0% {
+      transform: rotate(215deg) translateX(0);
+      opacity: 1;
+    }
+
+    70% {
+      opacity: 1;
+    }
+
+    100% {
+      transform: rotate(215deg) translateX(-500px);
+      opacity: 0;
+    }
   }
 
-  100% {
-    background-position: -50%;
+  @keyframes skeleton {
+    0% {
+      background-position: 150%;
+    }
+
+    100% {
+      background-position: -50%;
+    }
+  }
+
+  @keyframes shine {
+    0% {
+      background-position: 0% 0%;
+    }
+
+    50% {
+      background-position: 100% 100%;
+    }
+
+    100% {
+      background-position: 0% 0%;
+    }
   }
 }

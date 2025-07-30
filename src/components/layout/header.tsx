@@ -31,8 +31,6 @@ export default function Header() {
 
   const backdropFilter = useMotionTemplate`blur(calc(min(${scrollYProgress}, 0.2) * 60px)`;
 
-  console.log(backdropFilter);
-
   return (
     <motion.header
       className={cn(
@@ -46,7 +44,7 @@ export default function Header() {
       style={{ backdropFilter }}
     >
       <div className="flex gap-8 items-center h-full">
-        <Link href="/" className="text-inherit">
+        <Link href="/" className="text-inherit" title="Home page">
           <h3 className="font-bold">
             <span className="mobile-hidden">Dollar $ign</span>
             <span className="mobile-visible">$</span>
@@ -61,6 +59,7 @@ export default function Header() {
           bgColor="transparent"
           fgColor="var(--foreground)"
           style={{ height: 44, width: 44 }}
+          title="View GitHub"
         />
         <ThemeSwitcher className="z-50" />
       </div>

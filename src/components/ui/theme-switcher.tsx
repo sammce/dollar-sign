@@ -46,7 +46,11 @@ function ThemeSwitcher({ className }: { className?: string }) {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="shadow-xs rounded-full w-11 h-11">
+        <Button
+          variant="outline"
+          className="shadow-xs rounded-full w-11 h-11"
+          title="Switch Theme"
+        >
           {icon}
         </Button>
       </DropdownMenuTrigger>
