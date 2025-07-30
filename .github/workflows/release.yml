@@ -1,47 +1,100 @@
-name: Deploy to Vercel Staging/Production
+name: Next Release CI/CD
 
 on:
-  workflow_run:
-    workflows: ["Next CI"]
-    types:
-      - completed
-env:
-  VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  push:
+    branches:
+      - main
+    tags:
+      - "v*.*.*"
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  deploy-staging:
+  setup:
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/heads/main')
+    outputs:
+      node-version: "23"
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install pnpm
+      - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 10
           run_install: false
 
-      - name: Install Node
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "23"
           cache: "pnpm"
 
       - name: Install dependencies
-        run: pnpm install && pnpm install -g vercel
+        run: pnpm install
+
+      - name: Install vercel
+        run: pnpm add -g vercel
+
+  lint-and-format:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run lint
+        run: pnpm lint
+
+      - name: Check formatting
+        run: pnpm format:check
+
+  build:
+    needs: lint-and-format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build app
+        run: pnpm build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          path: .next/
+
+  deploy-staging:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download build output
+        uses: actions/download-artifact@v4
+        with:
+          name: build-output
+          path: .next/
 
       - name: Deploy to Vercel (Staging)
-        run: vercel --skip-domain --token=$VERCEL_TOKEN --yes > deployment_id.txt
-
-      - uses: actions/upload-artifact@v4
+        uses: amondnet/vercel-action@v25
         with:
-          name: vercel-deployment-id
-          path: deployment_id.txt
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: "--prebuilt --token ${{ secrets.VERCEL_TOKEN }} --yes"
+          working-directory: ./
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          scope: ${{ secrets.VERCEL_ORG_ID }}
+        env:
+          VERCEL_ENV: preview
 
   deploy-production:
+    needs: build
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
     steps:
@@ -53,22 +106,7 @@ jobs:
           name: vercel-deployment-id
           path: .
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10
-          run_install: false
-
-      - name: Install Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "23"
-          cache: "pnpm"
-
-      - name: Install dependencies
-        run: pnpm install && pnpm install -g vercel
-
       - name: Deploy to Vercel Production
         run: |
           deployment_id=$(cat deployment_id.txt)
-          vercel promote $deployment_id --token=$VERCEL_TOKEN --yes
+          vercel promote $deployment_id --token=${{ secrets.VERCEL_TOKEN }} --yes
