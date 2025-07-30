@@ -31,8 +31,7 @@ export default function Header() {
 
   const backdropFilter = useMotionTemplate`blur(calc(min(${scrollYProgress}, 0.2) * 60px)`;
 
-  console.log(backdropFilter)
-
+  console.log(backdropFilter);
 
   return (
     <motion.header
