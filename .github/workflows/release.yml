@@ -16,97 +16,126 @@ jobs:
     outputs:
       node-version: "23"
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v4
         with:
           version: 10
           run_install: false
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: "23"
           cache: "pnpm"
 
-      - name: Install dependencies
-        run: pnpm install
+      - run: pnpm install
 
-      - name: Install vercel
-        run: pnpm add -g vercel
+      - name: Save node_modules
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            node_modules
+            .next/cache
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
 
   lint-and-format:
     needs: setup
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Run lint
-        run: pnpm lint
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
 
-      - name: Check formatting
-        run: pnpm format:check
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "23"
+          cache: "pnpm"
+
+      - uses: actions/cache/restore@v4
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - run: pnpm lint
+
+      - run: pnpm format:check
 
   build:
     needs: lint-and-format
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Build app
-        run: pnpm build
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "23"
+          cache: "pnpm"
+
+      - uses: actions/cache/restore@v4
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - run: pnpm build
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build-output
-          path: .next/
+          name: vercel-output
+          path: .vercel/output
 
   deploy-staging:
     needs: build
-    runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Download build output
-        uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v4
         with:
-          name: build-output
-          path: .next/
+          name: vercel-output
+          path: .vercel/output
 
-      - name: Deploy to Vercel (Staging)
-        uses: amondnet/vercel-action@v25
+      - run: pnpm add -g vercel
+
+      - name: Deploy to Vercel (Preview)
+        id: vercel-deploy
+        run: |
+          deployment_url=$(vercel deploy --prebuilt --token ${{ secrets.VERCEL_TOKEN }} --yes)
+          echo "Vercel URL: $deployment_url"
+          echo "$deployment_url" > deployment_id.txt
+
+      - name: Upload deployment ID
+        uses: actions/upload-artifact@v4
         with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: "--prebuilt --token ${{ secrets.VERCEL_TOKEN }} --yes"
-          working-directory: ./
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          scope: ${{ secrets.VERCEL_ORG_ID }}
-        env:
-          VERCEL_ENV: preview
+          name: vercel-deployment-id
+          path: deployment_id.txt
 
   deploy-production:
     needs: build
-    runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+
+      - run: pnpm add -g vercel
 
       - uses: actions/download-artifact@v4
         with:
           name: vercel-deployment-id
           path: .
 
-      - name: Deploy to Vercel Production
+      - name: Promote to Production
         run: |
           deployment_id=$(cat deployment_id.txt)
-          vercel promote $deployment_id --token=${{ secrets.VERCEL_TOKEN }} --yes
+          vercel promote "$deployment_id" --token ${{ secrets.VERCEL_TOKEN }} --yes
