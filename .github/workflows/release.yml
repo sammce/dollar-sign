@@ -54,7 +54,7 @@ jobs:
         with:
           token: "${{ github.token }}"
           target_url: "${{ steps.vercel-deploy.outputs.deployment_url }}"
-          description: "${{ steps.vercel-deploy.outputs.deployment_url }}"
+          description: "Preview: ${{ steps.vercel-deploy.outputs.deployment_url }}"
           environment: Staging
 
       - name: Update deployment status (success)
@@ -63,7 +63,7 @@ jobs:
         with:
           token: "${{ github.token }}"
           target_url: "${{ steps.vercel-deploy.outputs.deployment_url }}"
-          description: "${{ steps.vercel-deploy.outputs.deployment_url }}"
+          description: "Preview: ${{ steps.vercel-deploy.outputs.deployment_url }}"
           environment: Staging
           state: "success"
           deployment_id: "${{ steps.deployment.outputs.deployment_id }}"
