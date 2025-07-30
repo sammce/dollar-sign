@@ -38,7 +38,7 @@ jobs:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
-          deployment_url=$(vercel --token=${{ secrets.VERCEL_TOKEN }} --target=Staging --yes)
+          deployment_url=$(vercel --token=${{ secrets.VERCEL_TOKEN }} --target=Preview --yes)
           echo "$deployment_url" > deployment_id.txt
 
       - name: Upload deployment ID
