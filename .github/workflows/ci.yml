@@ -3,15 +3,14 @@ name: Next CI
 on:
   push:
     branches:
-      - "staging"
       - "feature/**"
       - "main"
     tags:
-      - "v*.*.*" # Trigger on semver tags
+      - "v*.*.*"
   pull_request:
     branches:
-      - "staging"
-  workflow_dispatch: # manual trigger
+      - "feature/**"
+      - "main"
 
 jobs:
   lint-and-format:
