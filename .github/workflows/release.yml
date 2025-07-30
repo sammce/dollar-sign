@@ -11,54 +11,13 @@ on:
       - main
 
 jobs:
-  setup:
-    runs-on: ubuntu-latest
-    outputs:
-      node-version: "23"
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-          run_install: false
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "23"
-          cache: "pnpm"
-
-      - run: pnpm install
-
-      - name: Save node_modules
-        uses: actions/cache/save@v4
-        with:
-          path: |
-            node_modules
-            .next/cache
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
-
   lint-and-format:
     needs: setup
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-          run_install: false
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "23"
-          cache: "pnpm"
-
-      - uses: actions/cache/restore@v4
-        with:
-          path: |
-            node_modules
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+      - uses: ./github/actions/setup-node-pnpm
 
       - run: pnpm lint
 
@@ -70,23 +29,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-          run_install: false
+      - uses: ./github/actions/setup-node-pnpm
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "23"
-          cache: "pnpm"
-
-      - uses: actions/cache/restore@v4
-        with:
-          path: |
-            node_modules
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
-
-      - run: pnpm build
+      - run: vercel build --yes
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
@@ -101,17 +46,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: ./github/actions/setup-node-pnpm
+
       - uses: actions/download-artifact@v4
         with:
           name: vercel-output
           path: .vercel/output
 
-      - run: pnpm add -g vercel
-
       - name: Deploy to Vercel (Preview)
         id: vercel-deploy
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
-          deployment_url=$(vercel deploy --prebuilt --token ${{ secrets.VERCEL_TOKEN }} --yes)
+          deployment_url=$(vercel deploy --prebuilt --token $VERCEL_TOKEN --yes)
           echo "Vercel URL: $deployment_url"
           echo "$deployment_url" > deployment_id.txt
 
@@ -128,7 +77,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: pnpm add -g vercel
+      - uses: ./github/actions/setup-node-pnpm
 
       - uses: actions/download-artifact@v4
         with:
