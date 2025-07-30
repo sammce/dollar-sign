@@ -5,12 +5,14 @@ import { ThemeSwitcher } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { SocialIcon } from "react-social-icons";
+import { motion, useMotionTemplate, useScroll } from "motion/react";
 
 /**
  * Footer layout component
  */
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { scrollYProgress } = useScroll();
 
   useEffect(() => {
     const threshold = 20;
@@ -27,16 +29,22 @@ export default function Header() {
     };
   });
 
+  const backdropFilter = useMotionTemplate`blur(calc(min(${scrollYProgress}, 0.2) * 60px)`;
+
+  console.log(backdropFilter)
+
+
   return (
-    <header
+    <motion.header
       className={cn(
         // Apply shadow to the after element on scroll, this is more performant and looks smoother than adding shadow to element itself
         "px-6 py-2 flex justify-between items-center z-30 h-18 fixed w-full after:opacity-0 after:transition-opacity not-dark:after:shadow-sm after:w-full after:h-full after:absolute after:left-0 after:-z-10",
         {
-          "after:opacity-100 dark:border-b dark:border-border/50 backdrop-blur-2xl bg-background/40":
+          "after:opacity-100 dark:border-b dark:border-border/50 bg-background/40":
             isScrolled,
         },
       )}
+      style={{ backdropFilter }}
     >
       <div className="flex gap-8 items-center h-full">
         <Link href="/" className="text-inherit">
@@ -57,6 +65,6 @@ export default function Header() {
         />
         <ThemeSwitcher className="z-50" />
       </div>
-    </header>
+    </motion.header>
   );
 }

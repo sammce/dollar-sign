@@ -1,16 +1,18 @@
 "use client";
 
 import { HeroAnimation } from "@/components/atoms";
+import { ShineBorder } from "@/components/magicui/shine-border";
 import {
   Button,
   ContainerTextFlip,
   HeroHighlight,
   HoverBorderGradient,
+  GlassCard
 } from "@/components/ui";
 
 export default function Home() {
   return (
-    <HeroHighlight>
+    <HeroHighlight containerClassName="min-h-[calc(100vh-10rem)] relative">
       <div className="flex items-center gap-20">
         <div>
           <h1 className="text-center xl:text-left text-6xl xl:text-8xl font-bold min-w-[34rem] xl:min-w-[40rem]">
@@ -28,14 +30,20 @@ export default function Home() {
             <HoverBorderGradient
               as={Button}
               containerClassName="mx-auto xl:mx-0 mt-10"
-              className="text-xl"
+              className="text-xl uppercase font-mono"
             >
               Get Started
             </HoverBorderGradient>
           </div>
         </div>
-        <div className="mobile-hidden">
-          <HeroAnimation />
+        {/* Skewed */}
+        <div className="mobile-hidden   relative min-w-[250px] min-h-[250px]">
+          <GlassCard className="bg-background backdrop-blur-none transform-3d -skew-12 rotate-x-[50deg] min-h-[350px] min-w-[350px] relative">
+
+            <ShineBorder shineColor={["#00FF65","#00F3BD", "#00FF00"]}/>
+          </GlassCard>
+            <div className="bg-primary/20 absolute w-full h-full -top-[3px] -left-[2px] rounded-xl -z-10 transform-3d -skew-12 rotate-x-[50deg] min-h-[368px] min-w-[362px] rounded-bl-2xl rounded-tr-3xl"></div>
+          <HeroAnimation className="absolute top-[-100px] left-[20px] w-[350px] h-[350px]"/>
         </div>
       </div>
     </HeroHighlight>

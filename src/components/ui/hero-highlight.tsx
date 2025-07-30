@@ -104,6 +104,7 @@ export const HeroHighlight = ({
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-background [mask-image:radial-gradient(ellipse_at_center,transparent_40%,black)]"></div>
 
       <div className={cn("relative z-20", className)}>{children}</div>
+      <div className="absolute bottom-0 left-0 w-full h-30 bg-gradient-to-t from-background via-background/50  to-transparent"></div>
     </div>
   );
 };
