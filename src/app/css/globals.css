@@ -219,6 +219,14 @@
 }
 
 /* Utilities */
+@utility container-full {
+  @apply max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+@utility container {
+  @apply container-full max-w-[800px];
+}
+
 @utility mobile-hidden {
   @apply hidden lg:block;
 }

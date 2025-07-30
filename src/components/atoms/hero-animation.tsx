@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 export default function HeroAnimation({ className }: { className?: string }) {
@@ -10,7 +11,7 @@ export default function HeroAnimation({ className }: { className?: string }) {
       autoplay
       height={250}
       width={250}
-      className={className}
+      className={cn("rotate-y-180", className)}
     />
   );
 }

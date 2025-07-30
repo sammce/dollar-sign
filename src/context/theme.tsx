@@ -21,12 +21,15 @@ const applyTheme = (theme: Theme) => {
 };
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [{ theme }, setCookie] = useCookies(["theme"]);
+  const [{ theme = "system" }, setCookie] = useCookies([
+    "theme",
+    "prefers-dark",
+  ]);
 
   useLayoutEffect(() => {
-    const safeTheme = theme || "system";
+    setCookie("prefers-dark", darkPreferred());
 
-    if (safeTheme === "system") {
+    if (theme === "system") {
       if (darkPreferred()) {
         applyTheme("dark");
       } else {
@@ -36,12 +39,17 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       return;
     }
 
-    applyTheme(safeTheme);
-  }, [theme]);
+    applyTheme(theme);
+  }, [theme, setCookie]);
 
   const setTheme = useCallback(
     (newTheme: Theme) => {
       setCookie("theme", newTheme);
+      if (newTheme === "system") {
+        if (darkPreferred()) {
+          setCookie("prefers-dark", true);
+        }
+      }
     },
     [setCookie],
   );
