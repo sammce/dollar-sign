@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: ./github/actions/setup-node-pnpm
+      - uses: ./.github/actions/setup-node-pnpm
 
       - run: pnpm lint
 
@@ -28,7 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: ./github/actions/setup-node-pnpm
+      - uses: ./.github/actions/setup-node-pnpm
 
       - run: vercel build --yes
 
@@ -45,7 +45,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: ./github/actions/setup-node-pnpm
+      - uses: ./.github/actions/setup-node-pnpm
 
       - uses: actions/download-artifact@v4
         with:
@@ -76,7 +76,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: ./github/actions/setup-node-pnpm
+      - uses: ./.github/actions/setup-node-pnpm
 
       - uses: actions/download-artifact@v4
         with:
