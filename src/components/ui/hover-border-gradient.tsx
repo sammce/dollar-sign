@@ -95,7 +95,10 @@ export function HoverBorderGradient({
             ? [movingMap[direction], highlight]
             : movingMap[direction],
         }}
-        transition={{ ease: "linear", duration: duration ?? 0.7 }}
+        transition={{
+          ease: "linear",
+          duration: hovered ? duration / 2 : duration,
+        }}
       />
       <div className="bg-black absolute z-1 flex-none inset-[2px] rounded-[100px]" />
     </Tag>

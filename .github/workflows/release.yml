@@ -30,7 +30,7 @@ jobs:
 
       - uses: ./.github/actions/setup-node-pnpm
 
-      - run: vercel build --yes
+      - run: vercel build --token=${{ secrets.VERCEL_TOKEN }} --yes
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
@@ -59,7 +59,7 @@ jobs:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
-          deployment_url=$(vercel deploy --prebuilt --token=$VERCEL_TOKEN --yes)
+          deployment_url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} --yes)
           echo "$deployment_url" > deployment_id.txt
 
       - name: Upload deployment ID

@@ -1,6 +1,11 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { useMotionValue, motion, useMotionTemplate } from "motion/react";
+import {
+  useMotionValue,
+  motion,
+  useMotionTemplate,
+  useSpring,
+} from "motion/react";
 import React from "react";
 
 const dotPatterns = {
@@ -14,7 +19,7 @@ const dotPatterns = {
   },
 };
 
-const highlightRadius = "150px";
+const highlightRadius = "200px";
 
 export const HeroHighlight = ({
   children,
@@ -25,8 +30,8 @@ export const HeroHighlight = ({
   className?: string;
   containerClassName?: string;
 }) => {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
+  const mouseX = useSpring(useMotionValue(0), { stiffness: 30, damping: 10 });
+  const mouseY = useSpring(useMotionValue(0), { stiffness: 30, damping: 10 });
 
   // SVG patterns for different states and themes
 

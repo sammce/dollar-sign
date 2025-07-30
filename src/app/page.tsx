@@ -26,7 +26,7 @@ export default function Home() {
                 "lunches",
                 "assets",
               ]}
-              className="mt-5 -pt-1 pb-5"
+              className="mt-5 pt-2 xl:pt-0 pb-3"
               textClassName="text-6xl xl:text-8xl font-bold"
               interval={4000}
             />
