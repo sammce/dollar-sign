@@ -36,8 +36,8 @@ jobs:
         id: deployment
         with:
           token: "${{ github.token }}"
-          target_url: "dollar-sign-sammce-sammces-projects.vercel.app"
-          description: "Preview: dollar-sign-sammce-sammces-projects.vercel.app"
+          target_url: "https://dollar-sign-sammce-sammces-projects.vercel.app"
+          description: "Preview: https://dollar-sign-sammce-sammces-projects.vercel.app"
           environment: Staging
 
       - name: Deploy to Vercel (Preview)
@@ -62,8 +62,8 @@ jobs:
         uses: altinukshini/deployment-status@releases/v1
         with:
           token: "${{ github.token }}"
-          target_url: "dollar-sign-sammce-sammces-projects.vercel.app"
-          description: "Preview: dollar-sign-sammce-sammces-projects.vercel.app"
+          target_url: "https://dollar-sign-sammce-sammces-projects.vercel.app"
+          description: "Preview: https://dollar-sign-sammce-sammces-projects.vercel.app"
           environment: Staging
           state: "success"
           deployment_id: "${{ steps.deployment.outputs.deployment_id }}"
@@ -73,7 +73,7 @@ jobs:
         uses: altinukshini/deployment-status@releases/v1
         with:
           token: "${{ github.token }}"
-          target_url: "dollar-sign-sammce-sammces-projects.vercel.app"
+          target_url: "https://dollar-sign-sammce-sammces-projects.vercel.app"
           state: "failure"
           deployment_id: "${{ steps.deployment.outputs.deployment_id }}"
           description: "Failed to deploy"
