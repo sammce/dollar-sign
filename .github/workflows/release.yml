@@ -31,6 +31,15 @@ jobs:
 
       - uses: ./.github/actions/setup-node-pnpm
 
+      - uses: altinukshini/deployment-action@releases/v1
+        name: Create GitHub deployment
+        id: deployment
+        with:
+          token: "${{ github.token }}"
+          target_url: "dollar-sign-sammce-sammces-projects.vercel.app"
+          description: "Preview: dollar-sign-sammce-sammces-projects.vercel.app"
+          environment: Staging
+
       - name: Deploy to Vercel (Preview)
         id: vercel-deploy
         env:
@@ -48,22 +57,13 @@ jobs:
           name: vercel-deployment-url
           path: deployment_url.txt
 
-      - uses: altinukshini/deployment-action@releases/v1
-        name: Create GitHub deployment
-        id: deployment
-        with:
-          token: "${{ github.token }}"
-          target_url: "${{ steps.vercel-deploy.outputs.deployment_url }}"
-          description: "Preview: ${{ steps.vercel-deploy.outputs.deployment_url }}"
-          environment: Staging
-
       - name: Update deployment status (success)
         if: success()
         uses: altinukshini/deployment-status@releases/v1
         with:
           token: "${{ github.token }}"
-          target_url: "${{ steps.vercel-deploy.outputs.deployment_url }}"
-          description: "Preview: ${{ steps.vercel-deploy.outputs.deployment_url }}"
+          target_url: "dollar-sign-sammce-sammces-projects.vercel.app"
+          description: "Preview: dollar-sign-sammce-sammces-projects.vercel.app"
           environment: Staging
           state: "success"
           deployment_id: "${{ steps.deployment.outputs.deployment_id }}"
@@ -73,7 +73,7 @@ jobs:
         uses: altinukshini/deployment-status@releases/v1
         with:
           token: "${{ github.token }}"
-          target_url:
+          target_url: "dollar-sign-sammce-sammces-projects.vercel.app"
           state: "failure"
           deployment_id: "${{ steps.deployment.outputs.deployment_id }}"
           description: "Failed to deploy"
