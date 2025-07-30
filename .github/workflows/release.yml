@@ -59,8 +59,7 @@ jobs:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
-          deployment_url=$(vercel deploy --prebuilt --token $VERCEL_TOKEN --yes)
-          echo "Vercel URL: $deployment_url"
+          deployment_url=$(vercel deploy --prebuilt --token=$VERCEL_TOKEN --yes)
           echo "$deployment_url" > deployment_id.txt
 
       - name: Upload deployment ID
@@ -86,4 +85,4 @@ jobs:
       - name: Promote to Production
         run: |
           deployment_id=$(cat deployment_id.txt)
-          vercel promote "$deployment_id" --token ${{ secrets.VERCEL_TOKEN }} --yes
+          vercel promote "$deployment_id" --token=${{ secrets.VERCEL_TOKEN }} --yes
