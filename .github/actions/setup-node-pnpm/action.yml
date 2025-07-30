@@ -25,6 +25,8 @@ runs:
 
     - name: Install dependencies
       run: pnpm install --frozen-lockfile
+      shell: bash
 
     - name: Install vercel cli
       run: pnpm add -g vercel
+      shell: bash
