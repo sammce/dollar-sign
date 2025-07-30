@@ -39,14 +39,14 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
           deployment_url=$(vercel --token=${{ secrets.VERCEL_TOKEN }} --skip-domain --yes)
-          echo "$deployment_url" > deployment_id.txt
+          echo "$deployment_url" > deployment_url.txt
           echo "deployment_url=$deployment_url" >> $GITHUB_OUTPUT
 
-      - name: Upload deployment ID
+      - name: Upload deployment URL
         uses: actions/upload-artifact@v4
         with:
-          name: vercel-deployment-id
-          path: deployment_id.txt
+          name: vercel-deployment-url
+          path: deployment_url.txt
 
       - name: Create GitHub Deployment
         uses: octokit/request-action@v2.x
@@ -56,7 +56,7 @@ jobs:
           mediaType: '{"previews": ["ant-man"]}'
           environment: staging
           auto_merge: false
-          required_contexts: []
+          required_contexts: "[]"
           ref: ${{ github.sha }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
