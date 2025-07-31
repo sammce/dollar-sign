@@ -2,7 +2,7 @@
 
 import { useTheme } from "@/hooks";
 import { Button } from "@/components/ui";
-import { Sun, Moon, MonitorCog } from "lucide-react";
+import { IconSun, IconMoon, IconDeviceDesktopCog } from "@tabler/icons-react";
 import type { Theme } from "@/context";
 import { cn } from "@/lib/utils";
 import {
@@ -23,9 +23,9 @@ const defaultIconProps = {
  * The different icons that can be shown by the dark mode toggle
  */
 const themeIcons: Record<Theme, React.ReactNode> = {
-  dark: <Moon {...defaultIconProps} />,
-  light: <Sun {...defaultIconProps} />,
-  system: <MonitorCog {...defaultIconProps} />,
+  dark: <IconMoon {...defaultIconProps} />,
+  light: <IconSun {...defaultIconProps} />,
+  system: <IconDeviceDesktopCog {...defaultIconProps} />,
 };
 
 /**

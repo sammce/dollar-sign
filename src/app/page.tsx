@@ -1,6 +1,6 @@
 "use client";
 
-import { HeroAnimation, SlopedShape } from "@/components/atoms";
+import { HeroAnimation, Macbook, SlopedShape } from "@/components/atoms";
 import {
   Button,
   ContainerTextFlip,
@@ -8,48 +8,58 @@ import {
   HoverBorderGradient,
   GlassCard,
   ShineBorder,
+  TextReveal,
 } from "@/components/ui";
 
 export default function Home() {
   return (
-    <HeroHighlight containerClassName="min-h-[calc(100vh-10rem)] relative">
-      <div className="flex items-center gap-20">
-        <div>
-          <h1 className="text-center xl:text-left text-6xl xl:text-8xl font-bold min-w-[20rem] xl:min-w-[40rem]">
-            Take control <br />
-            of your <br />{" "}
-            <ContainerTextFlip
-              words={[
-                "future",
-                "shopping",
-                "subscriptions",
-                "lunches",
-                "assets",
-              ]}
-              className="mt-5 pt-2 xl:pt-0 pb-3"
-              textClassName="text-6xl xl:text-8xl font-bold"
-              interval={4000}
-            />
-          </h1>
-          <div className="w-full">
-            <HoverBorderGradient
-              as={Button}
-              containerClassName="mx-auto xl:mx-0 mt-10"
-              className="text-xl uppercase font-mono"
-            >
-              Get Started
-            </HoverBorderGradient>
+    <>
+      <HeroHighlight containerClassName="min-h-[calc(100vh-30rem)] xl:min-h-[calc(100vh-10rem)] relative">
+        <div className="flex items-center gap-20">
+          <div>
+            <h1 className="text-center xl:text-left text-5xl md:text-6xl xl:text-8xl font-bold min-w-[20rem] xl:min-w-[40rem]">
+              Take control <br />
+              of your <br />{" "}
+              <ContainerTextFlip
+                words={[
+                  "future",
+                  "shopping",
+                  "subscriptions",
+                  "lunches",
+                  "assets",
+                ]}
+                className="mt-5 pt-2 xl:pt-0 pb-3"
+                textClassName="text-5xl md:text-6xl xl:text-8xl font-bold"
+                interval={4000}
+              />
+            </h1>
+            <div className="w-full">
+              <HoverBorderGradient
+                as={Button}
+                containerClassName="mx-auto xl:mx-0 mt-10"
+                className="text-xl uppercase font-mono"
+              >
+                Get Started
+              </HoverBorderGradient>
+            </div>
+          </div>
+          <div className="mobile-hidden relative min-w-[250px] min-h-[250px]">
+            <GlassCard className="bg-background backdrop-blur-none transform-3d -skew-12 rotate-x-[50deg] min-h-[350px] min-w-[350px] relative overflow-hidden">
+              <ShineBorder shineColor={["#00FF65", "#00F3BD", "#00FF00"]} />
+            </GlassCard>
+            <div className="bg-primary/20 absolute w-full h-full -top-[3px] -left-[2px] rounded-xl -z-10 transform-3d -skew-12 rotate-x-[50deg] min-h-[368px] min-w-[362px] rounded-bl-2xl rounded-tr-3xl"></div>
+            <SlopedShape />
+            <HeroAnimation className="absolute top-[-100px] left-[-20px] w-[350px] h-[350px]" />
           </div>
         </div>
-        <div className="mobile-hidden relative min-w-[250px] min-h-[250px]">
-          <GlassCard className="bg-background backdrop-blur-none transform-3d -skew-12 rotate-x-[50deg] min-h-[350px] min-w-[350px] relative overflow-hidden">
-            <ShineBorder shineColor={["#00FF65", "#00F3BD", "#00FF00"]} />
-          </GlassCard>
-          <div className="bg-primary/20 absolute w-full h-full -top-[3px] -left-[2px] rounded-xl -z-10 transform-3d -skew-12 rotate-x-[50deg] min-h-[368px] min-w-[362px] rounded-bl-2xl rounded-tr-3xl"></div>
-          <SlopedShape />
-          <HeroAnimation className="absolute top-[-100px] left-[-20px] w-[350px] h-[350px]" />
-        </div>
+      </HeroHighlight>
+      <Macbook />
+      <div className="w-full -mt-[20vh]">
+        <TextReveal>
+          Track your income, expenses, and assets from the same dashboard. No
+          more juggling multiple apps.
+        </TextReveal>
       </div>
-    </HeroHighlight>
+    </>
   );
 }
