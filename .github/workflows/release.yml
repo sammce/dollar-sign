@@ -59,5 +59,9 @@ jobs:
       - uses: ./.github/actions/setup-node-pnpm
 
       - name: Promote to Production
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
           vercel promote "$STAGING_URL" --token=${{ secrets.VERCEL_TOKEN }} --yes

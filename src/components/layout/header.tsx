@@ -54,7 +54,7 @@ export default function Header() {
       <div className="flex gap-6 items-center">
         <SocialIcon
           url="https://github.com/sammce/budget-tool"
-          className="border rounded-full border-border shadow-xs hover:bg-accent/50 transition-colors bg-input/30"
+          className="border rounded-full border-border shadow-xs hover:bg-accent/50 transition-colors bg-background dark:bg-input/30"
           target="_blank"
           bgColor="transparent"
           fgColor="var(--foreground)"
