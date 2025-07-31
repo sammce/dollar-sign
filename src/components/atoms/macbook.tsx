@@ -224,8 +224,12 @@ export const Lid = ({
               style={{ opacity: textOpacity }}
               className="font-bold text-transparent bg-clip-text bg-gradient-to-b from-neutral-100 to-neutral-300 text-nowrap m-10"
             >
-              Fortunes don&apos;t come easy.
-              <br /> Let&apos;s make it happen.
+              The best time to start
+              <br />
+              planning for the future?
+              <br />
+              <br />
+              Right now
             </motion.h1>
           </MotionAnimatedBackground>
         </motion.div>
