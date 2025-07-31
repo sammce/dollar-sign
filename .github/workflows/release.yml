@@ -44,15 +44,7 @@ jobs:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
-          deployment_url=$(vercel --token=${{ secrets.VERCEL_TOKEN }} --skip-domain --yes)
-          echo "$deployment_url" > deployment_url.txt
-          echo "deployment_url=$deployment_url" >> $GITHUB_OUTPUT
-
-      - name: Upload deployment URL
-        uses: actions/upload-artifact@v4
-        with:
-          name: vercel-deployment-url
-          path: deployment_url.txt
+          vercel --token=${{ secrets.VERCEL_TOKEN }} --skip-domain --yes
 
   deploy-production:
     needs: lint-and-format
@@ -66,12 +58,6 @@ jobs:
 
       - uses: ./.github/actions/setup-node-pnpm
 
-      - uses: actions/download-artifact@v4
-        with:
-          name: vercel-deployment-url
-          path: .
-
       - name: Promote to Production
         run: |
-          deployment_url=$(cat deployment_url.txt)
-          vercel promote "$deployment_url" --token=${{ secrets.VERCEL_TOKEN }} --yes
+          vercel promote "$STAGING_URL" --token=${{ secrets.VERCEL_TOKEN }} --yes
