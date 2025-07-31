@@ -14,10 +14,10 @@ import {
 export default function Home() {
   return (
     <>
-      <HeroHighlight containerClassName="relative pt-50">
-        <div className="flex items-center w-full gap-20 xl:gap-40 mb-10 xl:mb-35">
-          <div>
-            <h1 className="text-center xl:text-left text-5xl md:text-6xl xl:text-8xl font-bold min-w-[20rem] xl:min-w-[40rem]">
+      <HeroHighlight containerClassName="relative pt-50 overflow-x-hidden lg:overflow-x-visible  z-20">
+        <div className="flex items-center w-full gap-20 2xl:gap-40 -mb-20 xl:mb-35">
+          <div className="w-full">
+            <h1 className="text-center xl:text-left text-5xl md:text-6xl xl:text-8xl font-bold min-w-[20rem] md:min-w-[30rem] 2xl:min-w-[40rem]">
               Take control <br />
               of your <br />{" "}
               <ContainerTextFlip
