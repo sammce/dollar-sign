@@ -14,8 +14,8 @@ import {
 export default function Home() {
   return (
     <>
-      <HeroHighlight containerClassName="min-h-[calc(100vh-30rem)] xl:min-h-[calc(100vh-10rem)] relative">
-        <div className="flex items-center gap-20">
+      <HeroHighlight containerClassName="relative pt-50">
+        <div className="flex items-center w-full gap-20 xl:gap-40 mb-10 xl:mb-35">
           <div>
             <h1 className="text-center xl:text-left text-5xl md:text-6xl xl:text-8xl font-bold min-w-[20rem] xl:min-w-[40rem]">
               Take control <br />
@@ -52,9 +52,9 @@ export default function Home() {
             <HeroAnimation className="absolute top-[-100px] left-[-20px] w-[350px] h-[350px]" />
           </div>
         </div>
+        <Macbook />
       </HeroHighlight>
-      <Macbook />
-      <div className="w-full -mt-[20vh]">
+      <div className="w-full -mt-[10vh]">
         <TextReveal>
           Track your income, expenses, and assets from the same dashboard. No
           more juggling multiple apps.

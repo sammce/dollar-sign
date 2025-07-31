@@ -30,8 +30,9 @@ export const HeroHighlight = ({
   className?: string;
   containerClassName?: string;
 }) => {
-  const mouseX = useSpring(useMotionValue(0), { stiffness: 30, damping: 5 });
-  const mouseY = useSpring(useMotionValue(0), { stiffness: 30, damping: 5 });
+  const springOptions = { stiffness: 30, damping: 10, mass: 1, duration: 0.1 };
+  const mouseX = useSpring(useMotionValue(0), springOptions);
+  const mouseY = useSpring(useMotionValue(0), springOptions);
 
   // SVG patterns for different states and themes
 
@@ -49,7 +50,7 @@ export const HeroHighlight = ({
   return (
     <div
       className={cn(
-        "group relative flex h-[40rem] w-full items-center justify-center bg-background",
+        "group relative flex items-center justify-center bg-background",
         containerClassName,
       )}
       onMouseMove={handleMouseMove}

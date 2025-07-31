@@ -75,7 +75,7 @@ export const MacbookScroll = ({
   return (
     <div
       ref={ref}
-      className="flex min-h-[180vh] md:min-h-[180vh] shrink-0 transform flex-col items-center justify-start [perspective:800px] pt-0 scale-[60%] md:scale-[80%] xl:scale-[100%]"
+      className="min-h-[180vh] mobile-hidden lg:flex shrink-0 transform flex-col items-center justify-start [perspective:800px] pt-0 scale-[60%] md:scale-[80%] xl:scale-[100%]"
     >
       <motion.h1
         style={{
@@ -224,7 +224,7 @@ export const Lid = ({
               style={{ opacity: textOpacity }}
               className="font-bold text-transparent bg-clip-text bg-gradient-to-b from-neutral-100 to-neutral-300 text-nowrap m-10"
             >
-              Money won&apos;t make itself.
+              Fortunes don&apos;t come easy.
               <br /> Let&apos;s make it happen.
             </motion.h1>
           </MotionAnimatedBackground>
