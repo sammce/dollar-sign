@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useRef, useState } from "react";
 import {
   MotionValue,
@@ -44,7 +45,7 @@ export const MacbookScroll = ({
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start start", "end start"],
+    offset: ["start center", "end start"],
   });
 
   const [isMobile, setIsMobile] = useState(false);
@@ -65,7 +66,7 @@ export const MacbookScroll = ({
     [0, 0.3],
     [0.6, isMobile ? 1 : 1.5],
   );
-  const translate = useTransform(scrollYProgress, [0, 0.8], [0, 1200]);
+  const translate = useTransform(scrollYProgress, [0, 1], [0, 1450]);
 
   const rotate = useTransform(scrollYProgress, [0.1, 0.12, 0.3], [-28, -28, 0]);
   const textTransform = useTransform(scrollYProgress, [0, 0.3], [0, 100]);
@@ -74,7 +75,7 @@ export const MacbookScroll = ({
   return (
     <div
       ref={ref}
-      className="flex min-h-[180vh] md:min-h-[200vh] shrink-0 transform flex-col items-center justify-start [perspective:800px] pt-0 scale-[60%] md:pt-20 md:scale-[80%] xl:scale-[100%] -mt-60 xl:pt-50"
+      className="flex min-h-[180vh] md:min-h-[180vh] shrink-0 transform flex-col items-center justify-start [perspective:800px] pt-0 scale-[60%] md:scale-[80%] xl:scale-[100%]"
     >
       <motion.h1
         style={{

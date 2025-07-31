@@ -73,7 +73,7 @@ export const BackgroundGradientAnimation = ({
     }
 
     move();
-  }, [tgX, tgY, curX, curY]);
+  }, [tgX, tgY]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     if (interactiveRef.current) {

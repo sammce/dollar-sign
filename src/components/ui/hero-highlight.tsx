@@ -19,7 +19,7 @@ const dotPatterns = {
   },
 };
 
-const highlightRadius = "200px";
+const highlightRadius = "250px";
 
 export const HeroHighlight = ({
   children,
@@ -30,8 +30,8 @@ export const HeroHighlight = ({
   className?: string;
   containerClassName?: string;
 }) => {
-  const mouseX = useSpring(useMotionValue(0), { stiffness: 30, damping: 10 });
-  const mouseY = useSpring(useMotionValue(0), { stiffness: 30, damping: 10 });
+  const mouseX = useSpring(useMotionValue(0), { stiffness: 30, damping: 5 });
+  const mouseY = useSpring(useMotionValue(0), { stiffness: 30, damping: 5 });
 
   // SVG patterns for different states and themes
 
