@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   MotionValue,
   motion,
@@ -33,6 +33,45 @@ import {
 import { BackgroundGradientAnimation } from "../ui";
 import { useIsMobile } from "@/hooks";
 
+const useTranslatedHeight = (defaultHeight: number = 1500) => {
+  const [height, setHeight] = useState(defaultHeight);
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout | null = null;
+
+    const handleResize = () => {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+
+      timeout = setTimeout(() => {
+        const h = window.innerHeight;
+
+        if (h < 700) {
+          setHeight(2250);
+        } else if (h < 1000) {
+          setHeight(1750);
+        } else if (h < 1400) {
+          setHeight(1500);
+        } else {
+          setHeight(1300);
+        }
+      }, 300);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+    };
+  }, []);
+
+  return height;
+};
+
 export const MacbookScroll = ({
   showGradient,
   title,
@@ -54,17 +93,19 @@ export const MacbookScroll = ({
   const scaleX = useTransform(
     scrollYProgress,
     [0, 0.3],
-    [1.2, isMobile ? 1.5 : 1.5],
+    [1.2, isMobile ? 1.4 : 1.5],
   );
   const scaleY = useTransform(
     scrollYProgress,
     [0, 0.3],
-    [0.6, isMobile ? 1.5 : 1.5],
+    [0.6, isMobile ? 1.4 : 1.5],
   );
+
+  const innerHeight = useTranslatedHeight();
   const translate = useTransform(
     scrollYProgress,
     [isMobile ? 0.1 : 0, 1],
-    ["0vh", isMobile ? "190vh" : "135vh"],
+    [0, innerHeight],
   );
 
   const rotate = useTransform(
@@ -78,7 +119,7 @@ export const MacbookScroll = ({
   return (
     <div
       ref={ref}
-      className="min-h-[180vh] lg:flex shrink-0 transform flex-col items-center justify-start [perspective:800px] pt-0 scale-[60%] md:scale-[80%] xl:scale-[100%]"
+      className="min-h-[180vh] lg:flex shrink-0 transform flex-col items-center justify-start [perspective:800px] pt-20 w-full scale-[60%] md:scale-[80%] xl:scale-[100%]"
     >
       <motion.h1
         style={{

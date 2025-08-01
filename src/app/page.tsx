@@ -17,7 +17,7 @@ export default function Home() {
       <HeroHighlight containerClassName="relative pt-50 z-20">
         <div className="flex items-center w-full gap-20 2xl:gap-40 -mb-25 xl:mb-35">
           <div className="w-full">
-            <h1 className="text-center 2xl:text-left text-5xl md:text-6xl xl:text-8xl font-bold min-w-[20rem] xl:min-w-[40rem]">
+            <h1 className="text-center 2xl:text-left text-5xl md:text-6xl xl:text-8xl font-bold xl:min-w-[40rem]">
               Take control <br />
               of your <br />{" "}
               <ContainerTextFlip
