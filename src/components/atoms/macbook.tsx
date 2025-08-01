@@ -63,8 +63,8 @@ export const MacbookScroll = ({
   );
   const translate = useTransform(
     scrollYProgress,
-    [0, 1],
-    ["0vh", isMobile ? "200vh" : "135vh"],
+    [isMobile ? 0.1 : 0, 1],
+    ["0vh", isMobile ? "190vh" : "135vh"],
   );
 
   const rotate = useTransform(
@@ -150,7 +150,7 @@ export const Lid = ({
   scaleX: MotionValue<number>;
   scaleY: MotionValue<number>;
   rotate: MotionValue<number>;
-  translate: MotionValue<string>;
+  translate: MotionValue<number> | MotionValue<string>;
 }) => {
   const { scrollYProgress } = useScroll();
   const scrollBase = 0.2;
@@ -205,7 +205,7 @@ export const Lid = ({
           opacity: screenOpacity,
         }}
         className={cn(
-          "absolute inset-0 h-96 w-full lg:w-[32rem] rounded-2xl bg-[#010101] backdrop-blur-lg border dark:border-neutral-800 drop-shadow-lg drop-shadow-emerald-700/40",
+          "absolute inset-0 h-80 lg:h-96 w-full lg:w-[32rem] rounded-2xl bg-[#010101] backdrop-blur-lg border dark:border-neutral-800 drop-shadow-lg drop-shadow-emerald-700/40",
           "flex items-center justify-center overflow-hidden",
         )}
       >
