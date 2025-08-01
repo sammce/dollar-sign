@@ -54,14 +54,18 @@ export const MacbookScroll = ({
   const scaleX = useTransform(
     scrollYProgress,
     [0, 0.3],
-    [1.2, isMobile ? 1.2 : 1.5],
+    [1.2, isMobile ? 1.5 : 1.5],
   );
   const scaleY = useTransform(
     scrollYProgress,
     [0, 0.3],
-    [0.6, isMobile ? 1.2 : 1.5],
+    [0.6, isMobile ? 1.5 : 1.5],
   );
-  const translate = useTransform(scrollYProgress, [0, 1], [0, 1450]);
+  const translate = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["0vh", isMobile ? "200vh" : "135vh"],
+  );
 
   const rotate = useTransform(
     scrollYProgress,
@@ -128,15 +132,13 @@ export const MacbookScroll = ({
 const MotionAnimatedBackground = motion.create(BackgroundGradientAnimation);
 
 const gradientColours = {
-  gradientBackgroundStart: "rgb(0, 180, 150)",
-  gradientBackgroundEnd: "rgb(0, 90, 130)",
-
-  firstColor: "0, 200, 180",
-  secondColor: "0, 160, 130",
-  thirdColor: "80, 220, 200",
-  fourthColor: "50, 180, 100",
-  fifthColor: "100, 240, 180",
-  pointerColor: "0, 140, 255",
+  gradientBackgroundStart: "rgb(27, 117, 61)",
+  gradientBackgroundEnd: "rgb(73, 179, 175)",
+  firstColor: "18, 204, 255",
+  secondColor: "221, 74, 255",
+  thirdColor: "100, 255, 192",
+  fourthColor: "102, 50, 200",
+  fifthColor: "180, 180, 50",
 };
 
 export const Lid = ({
@@ -148,7 +150,7 @@ export const Lid = ({
   scaleX: MotionValue<number>;
   scaleY: MotionValue<number>;
   rotate: MotionValue<number>;
-  translate: MotionValue<number>;
+  translate: MotionValue<string>;
 }) => {
   const { scrollYProgress } = useScroll();
   const scrollBase = 0.2;
@@ -175,7 +177,7 @@ export const Lid = ({
   );
   const textOpacity = useTransform(
     scrollYProgress,
-    [scrollBase + scrollIncrement, scrollBase + 3 * scrollIncrement],
+    [scrollBase - scrollIncrement, scrollBase + 1 * scrollIncrement],
     [0, 1],
   );
 
@@ -217,11 +219,12 @@ export const Lid = ({
             containerClassName="w-full h-full"
             className="flex items-center justify-center text-center h-full w-full shadow-lg shadow-emerald-500"
             style={{ borderRadius: gradientRadius }}
+            size="250%"
             {...gradientColours}
           >
             <motion.h1
               style={{ opacity: textOpacity }}
-              className="font-bold text-transparent bg-clip-text bg-gradient-to-b from-neutral-100 to-neutral-300 text-nowrap m-10 text-3xl md:text-4xl"
+              className="font-bold text-transparent bg-clip-text bg-gradient-to-b from-neutral-50 to-neutral-100 text-nowrap m-10 text-3xl md:text-4xl p-4 z-10"
             >
               The best time to start
               <br />
