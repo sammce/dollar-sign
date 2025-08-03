@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   MotionValue,
   motion,
@@ -33,6 +33,34 @@ import {
 import { BackgroundGradientAnimation } from "../ui";
 import { useIsMobile } from "@/hooks";
 
+const useHeight = () => {
+  const [height, setHeight] = useState(1000);
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout | null = null;
+
+    const handleResize = () => {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+
+      timeout = setTimeout(() => {
+        setHeight(window.innerHeight);
+      }, 300);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      if (timeout) clearTimeout(timeout);
+    };
+  }, []);
+
+  return height;
+};
+
 export const MacbookScroll = ({
   showGradient,
   title,
@@ -50,6 +78,9 @@ export const MacbookScroll = ({
   });
 
   const isMobile = useIsMobile();
+  const height = useHeight();
+
+  const multiplier = isMobile ? 1.9 : 1.4;
 
   const scaleX = useTransform(
     scrollYProgress,
@@ -64,7 +95,7 @@ export const MacbookScroll = ({
   const translate = useTransform(
     scrollYProgress,
     [isMobile ? 0.1 : 0, 1],
-    ["0vh", isMobile ? "190vh" : "135vh"],
+    [0, height * multiplier],
   );
 
   const rotate = useTransform(
@@ -72,13 +103,13 @@ export const MacbookScroll = ({
     [0.1, 0.12, 0.25],
     [-28, -28, 0],
   );
-  const textTransform = useTransform(scrollYProgress, [0.1, 0.35], [0, 100]);
+  const textTransform = useTransform(scrollYProgress, [0, 0.35], [0, 100]);
   const textOpacity = useTransform(scrollYProgress, [0.1, 0.3], [1, 0]);
 
   return (
     <div
       ref={ref}
-      className="min-h-[180vh] lg:flex shrink-0 transform flex-col items-center justify-start [perspective:800px] pt-0 scale-[60%] md:scale-[80%] xl:scale-[100%]"
+      className="h-[180vh] lg:flex shrink-0 transform flex-col items-center justify-start [perspective:800px] pt-0 -mt-72 scale-[60%] md:scale-[100%] md:mt-0"
     >
       <motion.h1
         style={{

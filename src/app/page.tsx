@@ -14,10 +14,10 @@ import {
 export default function Home() {
   return (
     <>
-      <HeroHighlight containerClassName="relative pt-50 z-20">
-        <div className="flex items-center w-full gap-20 2xl:gap-40 -mb-25 xl:mb-35">
+      <HeroHighlight containerClassName="relative z-20">
+        <div className="flex items-center w-full gap-20 h-[80vh]">
           <div className="w-full">
-            <h1 className="text-center 2xl:text-left text-5xl md:text-6xl xl:text-8xl font-bold min-w-[20rem] xl:min-w-[40rem]">
+            <h1 className="text-center xl:text-left text-5xl md:text-6xl xl:text-8xl font-bold min-w-[20rem] xl:min-w-[40rem]">
               Take control <br />
               of your <br />{" "}
               <ContainerTextFlip
@@ -36,14 +36,14 @@ export default function Home() {
             <div className="w-full">
               <HoverBorderGradient
                 as={Button}
-                containerClassName="mx-auto 2xl:mx-0 mt-10"
+                containerClassName="mx-auto xl:mx-0 mt-10"
                 className="text-xl uppercase font-mono"
               >
                 Get Started
               </HoverBorderGradient>
             </div>
           </div>
-          <div className="hidden 2xl:block relative min-w-[250px] min-h-[250px]">
+          <div className="hidden xl:block relative min-w-[250px] min-h-[250px]">
             <GlassCard className="bg-background backdrop-blur-none transform-3d -skew-12 rotate-x-[50deg] min-h-[350px] min-w-[350px] relative overflow-hidden">
               <ShineBorder shineColor={["#00FF65", "#00F3BD", "#00FF00"]} />
             </GlassCard>
