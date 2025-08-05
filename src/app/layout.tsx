@@ -5,6 +5,7 @@ import Layout from "@/components/layout";
 
 import "./css/globals.css";
 import { cookies } from "next/headers";
+import { Theme } from "@/stores";
 
 const ibm = IBM_Plex_Sans({
   variable: "--font-ibm-sans",
@@ -21,6 +22,11 @@ export const metadata: Metadata = {
   description: "Stop worrying about your finances and let us worry for you.",
 };
 
+type ThemeCookie = {
+  prefersDark: boolean;
+  theme: Theme;
+};
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -28,12 +34,13 @@ export default async function RootLayout({
 }>) {
   const cookieStore = await cookies();
 
-  const storedTheme = cookieStore.get("theme")?.value;
-  const prefersDark = cookieStore.get("prefers-dark")?.value === "true";
+  const { prefersDark, theme } = (cookieStore.get("theme")?.value ?? {
+    prefersDark: false,
+    theme: "system",
+  }) as ThemeCookie;
 
   const initialTheme =
-    storedTheme === "dark" ||
-    (storedTheme === "system" && prefersDark ? "dark" : "");
+    theme === "dark" || (theme === "system" && prefersDark ? "dark" : "");
 
   return (
     <html lang="en">

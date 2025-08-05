@@ -189,26 +189,26 @@ export const Lid = ({
 
   const gradientSize = useTransform(
     scrollYProgress,
-    [scrollBase - scrollIncrement, scrollBase + 3 * scrollIncrement],
+    [scrollBase - scrollIncrement, scrollBase + 2 * scrollIncrement],
     [0, 300],
   );
   const screenOpacity = useTransform(
     scrollYProgress,
-    [scrollBase - 2 * scrollIncrement, scrollBase + 4 * scrollIncrement],
+    [scrollBase - 2 * scrollIncrement, scrollBase + 2 * scrollIncrement],
     [0.2, 1],
   );
   const gradientRadius = useTransform(
     scrollYProgress,
     [
       scrollBase,
-      scrollBase + 5 * scrollIncrement,
-      scrollBase + 6 * scrollIncrement,
+      scrollBase + 3 * scrollIncrement,
+      scrollBase + 4 * scrollIncrement,
     ],
     [100, 60, 0],
   );
   const textOpacity = useTransform(
     scrollYProgress,
-    [scrollBase, scrollBase + scrollIncrement],
+    [scrollBase - 2 * scrollIncrement, scrollBase + scrollIncrement],
     [0, 1],
   );
 

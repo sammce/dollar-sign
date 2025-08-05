@@ -17,7 +17,7 @@ export default function TracingBeam({
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start start", "end end"],
+    offset: [variant === "orange" ? "start center" : "start start", "end end"],
   });
 
   const contentRef = useRef<HTMLDivElement>(null);
@@ -37,7 +37,11 @@ export default function TracingBeam({
     },
   );
   const y2 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, svgHeight - 200]),
+    useTransform(
+      scrollYProgress,
+      [0, 1],
+      [0, variant === "blue" ? svgHeight : svgHeight - 200],
+    ),
     {
       stiffness: 400,
       damping: 90,
@@ -59,31 +63,14 @@ export default function TracingBeam({
         })}
       >
         {variant === "blue" && (
-          <motion.div
-            transition={{
-              duration: 0.2,
-              delay: 0.3,
-            }}
-            animate={{
-              boxShadow:
-                scrollYProgress.get() > 0
-                  ? "none"
-                  : "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+          <div
+            style={{
+              boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
             }}
             className="border-netural-200 ml-[27px] flex h-4 w-4 items-center justify-center rounded-full border shadow-sm"
           >
-            <motion.div
-              transition={{
-                duration: 0.2,
-                delay: 0.3,
-              }}
-              animate={{
-                backgroundColor: scrollYProgress.get() > 0 ? "#fff" : "#10b981",
-                borderColor: scrollYProgress.get() > 0 ? "#fff" : "#059669",
-              }}
-              className="h-2 w-2 rounded-full border border-neutral-300 bg-white"
-            />
-          </motion.div>
+            <div className="h-2 w-2 rounded-full border border-[#059669] bg-[#10b981]" />
+          </div>
         )}
         {variant === "orange" && (
           <div className="absolute -right-11 z-20 top-0 w-24 bg-orange-400 h-1 rounded-full shadow-[0_2px_10px_4px] shadow-orange-200 dark:shadow-orange-800"></div>
