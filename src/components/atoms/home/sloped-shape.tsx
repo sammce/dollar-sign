@@ -1,4 +1,4 @@
-import { Meteors } from "../ui";
+import { Meteors } from "@/components/ui";
 
 export default function SlopedShape() {
   const height = 480;

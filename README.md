@@ -20,10 +20,10 @@ The app uses the following technologies/libraries:
 - [TypeScript](https://www.typescriptlang.org/)
 - [Next.js](https://nextjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
-- [shadcn/ui](https://ui.shadcn.com/) (special mention to [Aceternity](https://ui.aceternity.com/) and [MagicUI](https://magicui.design/))
+- [shadcn/ui](https://ui.shadcn.com/) (special mention to [Aceternity](https://ui.aceternity.com/) and [MagicUI](https://magicui.design/), awesome design libraries!)
 - [Zustand](https://zustand-demo.pmnd.rs/)
 
-At the minute, the app is intended for local use (no cross device sync). This could be added in the future, I just don't want to pay for it right now.
+At the minute, the app is intended for local use (no backend/cross device sync). This could be added in the future, I just don't want to pay for it right now (I'm a broke student).
 
 ## [Installation](#installation)
 
@@ -40,18 +40,23 @@ To run the app locally, follow these steps:
 
 If you'd like to contribute to this project, please fork the repository and create a pull request.
 
-Please feel free to open an issue if you have any questions or suggestions.
+Please also feel free to open an issue if you have any questions or suggestions.
 
 ## [Features](#features)
 
-### Budget tracking
+### Budget/spending tracking
 
 - [ ] Input your savings/income in different currencies
 - [ ] Track monthly expenses (subscriptions, groceries, etc.)
 - [ ] Update values and charts on monthly basis
+- [ ] Receipt scanner? (would be hard)
 
 ### Commodity tracking
 
 - [ ] Input your commodities
 - [ ] Track their values
 - [ ] Also add in inflation data for fiat currencies
+
+### (Maybe)
+
+- [ ] QR code/sharable link for cross device sync, data would get stale over time but is free.

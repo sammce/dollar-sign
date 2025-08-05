@@ -30,7 +30,7 @@ import {
   IconCaretLeftFilled,
   IconCaretDownFilled,
 } from "@tabler/icons-react";
-import { BackgroundGradientAnimation } from "../ui";
+import { BackgroundGradientAnimation } from "@/components/ui";
 import { useIsMobile } from "@/hooks";
 
 const useHeight = () => {
@@ -64,12 +64,10 @@ const useHeight = () => {
 export const MacbookScroll = ({
   showGradient,
   title,
-  badge,
 }: {
   src?: string;
   showGradient?: boolean;
   title?: string | React.ReactNode;
-  badge?: React.ReactNode;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -109,7 +107,7 @@ export const MacbookScroll = ({
   return (
     <div
       ref={ref}
-      className="h-[180vh] lg:flex shrink-0 transform flex-col items-center justify-start [perspective:800px] pt-0 -mt-72 scale-[60%] md:scale-[100%] md:mt-0"
+      className="h-[180vh] lg:flex shrink-0 transform flex-col items-center justify-start [perspective:800px] pt-0 -mt-72 scale-[60%] md:scale-[70%] lg:scale-[100%] md:mt-0"
     >
       <motion.h1
         style={{
@@ -154,7 +152,6 @@ export const MacbookScroll = ({
         {showGradient && (
           <div className="absolute inset-x-0 bottom-0 z-50 h-40 w-full bg-gradient-to-t from-white via-white to-transparent dark:from-black dark:via-black"></div>
         )}
-        {badge && <div className="absolute bottom-4 left-4">{badge}</div>}
       </div>
     </div>
   );
@@ -283,8 +280,18 @@ export const Trackpad = () => {
 };
 
 export const Keypad = () => {
+  const isMobile = useIsMobile();
+
+  if (isMobile) {
+    return (
+      <div className="bg-[#050505] rounded-md w-full h-full p-1 mx-1">
+        <div className="h-40 w-full rounded-md bg-[#050505] p-1"></div>
+      </div>
+    );
+  }
+
   return (
-    <div className="mx-1 *:scale-[80%] *:-translate-x-[10%] lg:*:scale-[100%] lg:*:translate-x-0 h-full [transform:translateZ(0)] rounded-md bg-[#050505] p-1 [will-change:transform]">
+    <div className="mx-1 h-full [transform:translateZ(0)] rounded-md bg-[#050505] p-1 [will-change:transform]">
       {/* First Row */}
       <div className="mb-[2px] flex w-full shrink-0 gap-[2px]">
         <KBtn

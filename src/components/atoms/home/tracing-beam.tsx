@@ -48,8 +48,6 @@ export default function TracingBeam({
     },
   );
 
-  console.log({ y1, y2 });
-
   return (
     <motion.div
       ref={ref}
@@ -119,7 +117,7 @@ export default function TracingBeam({
         </svg>
       </div>
       {variant === "blue" && (
-        <div className="absolute left-5 z-20 -bottom-36 w-24 bg-sky-400 h-1 rounded-full shadow-[0_2px_10px_4px] shadow-sky-200 dark:shadow-sky-800"></div>
+        <div className="mobile-hidden absolute left-5 z-20 -bottom-36 w-24 bg-sky-400 h-1 rounded-full shadow-[0_2px_10px_4px] shadow-sky-200 dark:shadow-sky-800"></div>
       )}
       <div ref={contentRef}>{children}</div>
     </motion.div>

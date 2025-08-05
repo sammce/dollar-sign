@@ -8,6 +8,7 @@ export type Theme = "light" | "dark" | "system";
 export type SettingsStore = {
   theme: Theme;
   prefersDark: boolean;
+  effectiveTheme: "light" | "dark";
   setTheme: (theme: Theme) => void;
 };
 
@@ -20,15 +21,19 @@ export const useSettingsStore = create<SettingsStore>()(
   persist(
     (set, get) => ({
       theme: "system",
+      effectiveTheme: "light",
       prefersDark: darkPreferred(),
       setTheme: (theme) => {
         set({ theme });
 
         if (theme === "system") {
           applyTheme(get().prefersDark ? "dark" : "light");
+          set({ effectiveTheme: get().prefersDark ? "dark" : "light" });
+
           return;
         }
 
+        set({ effectiveTheme: theme });
         applyTheme(theme);
       },
     }),

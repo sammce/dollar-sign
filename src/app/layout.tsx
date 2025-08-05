@@ -34,13 +34,22 @@ export default async function RootLayout({
 }>) {
   const cookieStore = await cookies();
 
-  const { prefersDark, theme } = (cookieStore.get("theme")?.value ?? {
+  const settings = (cookieStore.get("settings-storage")?.value ?? {
     prefersDark: false,
     theme: "system",
-  }) as ThemeCookie;
+  }) as string;
 
-  const initialTheme =
-    theme === "dark" || (theme === "system" && prefersDark ? "dark" : "");
+  const { prefersDark, theme } = JSON.parse(settings).state as ThemeCookie;
+
+  let initialTheme = "light";
+
+  if (theme === "system") {
+    initialTheme = prefersDark ? "dark" : "light";
+  } else {
+    initialTheme = theme;
+  }
+
+  console.log(initialTheme);
 
   return (
     <html lang="en">

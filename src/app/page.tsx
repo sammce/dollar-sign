@@ -5,7 +5,8 @@ import {
   Macbook,
   TracingBeam,
   SlopedShape,
-} from "@/components/atoms";
+  AppearingCard,
+} from "@/components/atoms/home";
 import {
   Button,
   ContainerTextFlip,
@@ -69,7 +70,13 @@ export default function Home() {
       </div>
       <TracingBeam variant="orange">
         <div>
-          <div className="h-[200vh] w-full bg-background"></div>
+          <div className="h-[200vh] mx-auto w-90% m-auto bg-background">
+            <AppearingCard colour="silver">One</AppearingCard>
+            <AppearingCard colour="gold" offset>
+              More
+            </AppearingCard>
+            <AppearingCard colour="diamond">Thing...</AppearingCard>
+          </div>
         </div>
       </TracingBeam>
     </>
