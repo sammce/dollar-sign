@@ -189,7 +189,7 @@ export const Lid = ({
 
   const gradientSize = useTransform(
     scrollYProgress,
-    [scrollBase, scrollBase + 6 * scrollIncrement],
+    [scrollBase - scrollIncrement, scrollBase + 3 * scrollIncrement],
     [0, 300],
   );
   const screenOpacity = useTransform(
@@ -208,7 +208,7 @@ export const Lid = ({
   );
   const textOpacity = useTransform(
     scrollYProgress,
-    [scrollBase - scrollIncrement, scrollBase + 1 * scrollIncrement],
+    [scrollBase, scrollBase + scrollIncrement],
     [0, 1],
   );
 

@@ -25,4 +25,4 @@ const useIncomeStore = create<IncomeStore>()(
   ),
 );
 
-export default useIncomeStore;
+export { type IncomeStore, useIncomeStore };

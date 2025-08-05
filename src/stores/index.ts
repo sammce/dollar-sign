@@ -1,1 +1,3 @@
-export { default as useIncomeStore } from "./income";
+export * from "./income";
+export * from "./settings";
+export * from "./storage";

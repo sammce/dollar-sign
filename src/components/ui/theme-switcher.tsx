@@ -1,9 +1,7 @@
 "use client";
 
-import { useTheme } from "@/hooks";
 import { Button } from "@/components/ui";
 import { IconSun, IconMoon, IconDeviceDesktopCog } from "@tabler/icons-react";
-import type { Theme } from "@/context";
 import { cn } from "@/lib/utils";
 import {
   DropdownMenu,
@@ -14,6 +12,7 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui";
 import { useEffect, useState } from "react";
+import { useSettingsStore, type Theme } from "@/stores";
 
 const defaultIconProps = {
   className: "text-foreground size-5",
@@ -29,10 +28,10 @@ const themeIcons: Record<Theme, React.ReactNode> = {
 };
 
 /**
- * Allows switching themes via dropdown menu and also handles automatically setting the theme based on system preferences
+ * Allows switching themes via dropdown menu.
  */
 function ThemeSwitcher({ className }: { className?: string }) {
-  const [theme, setTheme] = useTheme();
+  const { theme, setTheme } = useSettingsStore();
   const [icon, setIcon] = useState<React.ReactNode>(null);
 
   useEffect(() => {

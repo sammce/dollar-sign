@@ -1,6 +1,3 @@
-const localStorageNames = {
-  name: "name" as const,
-  theme: "theme" as const,
-};
+const localStorageNames = {};
 
 export default localStorageNames;
