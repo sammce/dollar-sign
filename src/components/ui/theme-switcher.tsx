@@ -12,7 +12,7 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui";
 import { useEffect, useState } from "react";
-import { useSettingsStore, type Theme } from "@/stores";
+import { useThemeStore, type Theme } from "@/stores";
 
 const defaultIconProps = {
   className: "text-foreground size-5",
@@ -31,7 +31,7 @@ const themeIcons: Record<Theme, React.ReactNode> = {
  * Allows switching themes via dropdown menu.
  */
 function ThemeSwitcher({ className }: { className?: string }) {
-  const { theme, setTheme } = useSettingsStore();
+  const { theme, setTheme } = useThemeStore();
   const [icon, setIcon] = useState<React.ReactNode>(null);
 
   useEffect(() => {

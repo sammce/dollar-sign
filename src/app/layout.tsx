@@ -5,7 +5,7 @@ import Layout from "@/components/layout";
 
 import "./css/globals.css";
 import { cookies } from "next/headers";
-import { Theme } from "@/stores";
+import { Theme, themeStorageKey } from "@/stores";
 
 const ibm = IBM_Plex_Sans({
   variable: "--font-ibm-sans",
@@ -34,22 +34,23 @@ export default async function RootLayout({
 }>) {
   const cookieStore = await cookies();
 
-  const settings = (cookieStore.get("settings-storage")?.value ?? {
-    prefersDark: false,
-    theme: "system",
-  }) as string;
-
-  const { prefersDark, theme } = JSON.parse(settings).state as ThemeCookie;
-
+  const themeStore = cookieStore.get(themeStorageKey)?.value;
   let initialTheme = "light";
 
-  if (theme === "system") {
-    initialTheme = prefersDark ? "dark" : "light";
-  } else {
-    initialTheme = theme;
-  }
+  if (themeStore !== undefined) {
+    try {
+      const { prefersDark, theme } = JSON.parse(themeStore)
+        .state as ThemeCookie;
 
-  console.log(initialTheme);
+      if (theme === "system") {
+        initialTheme = prefersDark ? "dark" : "light";
+      } else {
+        initialTheme = theme;
+      }
+    } catch {
+      console.error("Failed to parse theme cookie");
+    }
+  }
 
   return (
     <html lang="en">

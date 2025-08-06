@@ -5,7 +5,7 @@ import { darkPreferred } from "@/lib/utils";
 
 export type Theme = "light" | "dark" | "system";
 
-export type SettingsStore = {
+export type ThemeStore = {
   theme: Theme;
   prefersDark: boolean;
   effectiveTheme: "light" | "dark";
@@ -17,7 +17,9 @@ function applyTheme(theme: Theme) {
   document.querySelector("body")?.classList.toggle("dark", theme === "dark");
 }
 
-export const useSettingsStore = create<SettingsStore>()(
+export const themeStorageKey = "theme-store";
+
+export const useThemeStore = create<ThemeStore>()(
   persist(
     (set, get) => ({
       theme: "system",
@@ -38,7 +40,7 @@ export const useSettingsStore = create<SettingsStore>()(
       },
     }),
     {
-      name: "settings-storage",
+      name: themeStorageKey,
       storage: createJSONStorage(() => cookieStorage),
     },
   ),

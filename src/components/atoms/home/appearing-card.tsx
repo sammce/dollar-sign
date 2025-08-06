@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useSettingsStore } from "@/stores";
+import { useThemeStore } from "@/stores";
 import { motion } from "motion/react";
 
 type Colour = "silver" | "gold" | "diamond";
@@ -29,7 +29,7 @@ export default function AppearingCard({
   colour: Colour;
   offset?: boolean;
 }) {
-  const { effectiveTheme } = useSettingsStore();
+  const { effectiveTheme } = useThemeStore();
 
   const gradient =
     effectiveTheme === "light" ? lightColours[colour] : darkColours[colour];

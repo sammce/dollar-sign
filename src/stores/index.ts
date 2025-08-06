@@ -1,3 +1,3 @@
 export * from "./income";
-export * from "./settings";
+export * from "./theme";
 export * from "./storage";

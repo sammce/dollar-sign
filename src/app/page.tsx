@@ -15,9 +15,20 @@ import {
   GlassCard,
   ShineBorder,
   TextReveal,
+  NumberTicker,
+  Confetti,
+  type ConfettiRef,
 } from "@/components/ui";
+import { useCallback, useRef } from "react";
 
 export default function Home() {
+  const confettiRef = useRef<ConfettiRef>(null);
+
+  const handleTickerFinish = useCallback(() => {
+    console.log("fire");
+    confettiRef.current?.fire({ spread: 90, particleCount: 200 });
+  }, []);
+
   return (
     <>
       <TracingBeam variant="blue">
@@ -76,6 +87,27 @@ export default function Home() {
               More
             </AppearingCard>
             <AppearingCard colour="diamond">Thing...</AppearingCard>
+          </div>
+
+          <div className="h-[60vh] relative mx-auto w-90% m-auto bg-background text-8xl font-bold flex justify-center items-center flex-col gap-4">
+            {/* TODO: Change this to localised currency */}
+            <p>It only costs</p>
+            <p>
+              <span className="text-primary mr-1">€</span>
+              <NumberTicker
+                value={0}
+                decimalPlaces={2}
+                startValue={100}
+                direction="up"
+                delay={0}
+                onFinish={handleTickerFinish}
+              />
+              <Confetti
+                ref={confettiRef}
+                manualstart
+                className="absolute left-0 top-0 size-full"
+              />
+            </p>
           </div>
         </div>
       </TracingBeam>
