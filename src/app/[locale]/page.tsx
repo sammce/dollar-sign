@@ -19,10 +19,13 @@ import {
   Confetti,
   type ConfettiRef,
 } from "@/components/ui";
+import { useMessages, useTranslations } from "next-intl";
 import { useCallback, useRef } from "react";
 
 export default function Home() {
   const confettiRef = useRef<ConfettiRef>(null);
+  const t = useTranslations("HomePage");
+  const messages = useMessages().HomePage;
 
   const handleTickerFinish = useCallback(() => {
     confettiRef.current?.fire({
@@ -39,29 +42,23 @@ export default function Home() {
           <div className="flex items-center w-full gap-20 h-[80vh]">
             <div className="w-full">
               <h1 className="text-center xl:text-left text-5xl md:text-6xl xl:text-8xl font-bold min-w-[20rem] xl:min-w-[40rem]">
-                Take control <br />
-                of your <br />{" "}
+                <span className="m-auto xl:ml-0 block max-w-80 md:max-w-96 xl:max-w-[36rem] break-words">
+                  {t("hero.title")}
+                </span>
                 <ContainerTextFlip
-                  words={[
-                    "future",
-                    "shopping",
-                    "subscriptions",
-                    "lunches",
-                    "assets",
-                  ]}
+                  words={messages.hero.rotatingWords}
                   className="mt-5 pt-1 xl:pt-0 pb-3 xl:pb-5"
                   textClassName="text-5xl md:text-6xl xl:text-8xl font-bold"
                   interval={4000}
                 />
               </h1>
-              <div className="w-full">
+              <div className="mx-auto xl:mx-0 mt-10 w-fit">
                 <HoverBorderGradient
                   as={LinkButton}
-                  containerClassName="mx-auto xl:mx-0 mt-10"
                   className="text-xl uppercase font-mono"
                   href="/dashboard"
                 >
-                  Get Started
+                  {t("hero.buttonText")}
                 </HoverBorderGradient>
               </div>
             </div>
@@ -78,24 +75,21 @@ export default function Home() {
         </HeroHighlight>
       </TracingBeam>
       <div className="w-full -mt-[10vh] ">
-        <TextReveal>
-          Track your income, expenses, and assets from the same dashboard. No
-          more juggling multiple apps.
-        </TextReveal>
+        <TextReveal>{t("textReveal")}</TextReveal>
       </div>
       <TracingBeam variant="orange">
         <div>
           <div className="min-h-[120vh] mx-auto w-90% m-auto bg-background">
-            <AppearingCard colour="silver">One</AppearingCard>
+            <AppearingCard colour="silver">{messages.cards[0]}</AppearingCard>
             <AppearingCard colour="gold" offset>
-              More
+              {messages.cards[1]}
             </AppearingCard>
-            <AppearingCard colour="diamond">Thing...</AppearingCard>
+            <AppearingCard colour="diamond">{messages.cards[2]}</AppearingCard>
           </div>
 
-          <div className="h-[100vh] relative mx-auto w-90% m-auto bg-background text-8xl font-bold flex justify-center items-center flex-col gap-4 z-30 text-center">
+          <div className="h-[100vh] relative mx-auto w-90% m-auto bg-background text-6xl lg:text-8xl font-bold flex justify-center items-center flex-col gap-4 z-30 text-center">
             {/* TODO: Change this to localised currency */}
-            <p>It only costs</p>
+            <p>{t("finalCTA.title")}</p>
             <p>
               <span className="text-primary mr-1">€</span>
               <NumberTicker
@@ -117,7 +111,7 @@ export default function Home() {
               containerClassName="mx-auto xl:mx-0 mt-10"
               className="text-xl uppercase font-mono"
             >
-              Start saving
+              {t("finalCTA.buttonText")}
             </HoverBorderGradient>
           </div>
         </div>

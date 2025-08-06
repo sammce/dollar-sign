@@ -32,6 +32,7 @@ import {
 } from "@tabler/icons-react";
 import { BackgroundGradientAnimation } from "@/components/ui";
 import { useIsMobile } from "@/hooks";
+import { useTranslations } from "next-intl";
 
 const useHeight = () => {
   const [height, setHeight] = useState(1000);
@@ -63,12 +64,12 @@ const useHeight = () => {
 
 export const MacbookScroll = ({
   showGradient,
-  title,
 }: {
   src?: string;
   showGradient?: boolean;
   title?: string | React.ReactNode;
 }) => {
+  const t = useTranslations("HomePage");
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -116,12 +117,7 @@ export const MacbookScroll = ({
         }}
         className="mb-10 text-center text-5xl font-bold text-neutral-800 dark:text-white"
       >
-        {title || (
-          <span>
-            All your finances
-            <br /> in one place
-          </span>
-        )}
+        <span className="block max-w-[36rem]">{t("macbook.title")}</span>
       </motion.h1>
       {/* Lid */}
       <Lid
@@ -180,6 +176,8 @@ export const Lid = ({
   rotate: MotionValue<number>;
   translate: MotionValue<number> | MotionValue<string>;
 }) => {
+  const t = useTranslations("HomePage");
+
   const { scrollYProgress } = useScroll();
   const scrollBase = 0.2;
   const scrollIncrement = 0.05;
@@ -252,14 +250,14 @@ export const Lid = ({
           >
             <motion.h1
               style={{ opacity: textOpacity }}
-              className="font-bold text-transparent bg-clip-text bg-gradient-to-b from-neutral-50 to-neutral-100 text-nowrap m-10 text-3xl md:text-4xl p-4 z-10"
+              className="font-bold text-transparent bg-clip-text bg-gradient-to-b from-neutral-50 to-neutral-100 m-10 text-3xl md:text-4xl p-4 z-10"
             >
-              The best time to start
+              <span className="block w-[32rem] mx-auto">
+                {t("macbook.screen.top")}
+              </span>
               <br />
-              planning for the future?
               <br />
-              <br />
-              Right now
+              {t("macbook.screen.bottom")}
             </motion.h1>
           </MotionAnimatedBackground>
         </motion.div>
