@@ -1,5 +1,5 @@
 import { headers } from "next/headers";
-import { supportedLanguages } from "@/constants";
+import { supportedLanguages, type SupportedLanguage } from "@/constants";
 
 /**
  * Parse the Accept-Language header and return the first supported locale/language.
@@ -13,7 +13,9 @@ export async function getLanguage() {
     .get("Accept-Language")
     ?.split(",")
     .map((lang) => lang.split(";")[0])
-    .find((lang) => supportedLanguages.includes(lang.split("-")[0]));
+    .find((lang) =>
+      supportedLanguages.includes(lang.split("-")[0] as SupportedLanguage),
+    );
 
   const language = locale?.split("-")[0];
 
