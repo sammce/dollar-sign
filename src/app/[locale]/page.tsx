@@ -8,7 +8,7 @@ import {
   AppearingCard,
 } from "@/components/atoms/home";
 import {
-  Button,
+  LinkButton,
   ContainerTextFlip,
   HeroHighlight,
   HoverBorderGradient,
@@ -25,8 +25,11 @@ export default function Home() {
   const confettiRef = useRef<ConfettiRef>(null);
 
   const handleTickerFinish = useCallback(() => {
-    console.log("fire");
-    confettiRef.current?.fire({ spread: 90, particleCount: 200 });
+    confettiRef.current?.fire({
+      spread: 90,
+      particleCount: 200,
+      origin: { y: 0.8 },
+    });
   }, []);
 
   return (
@@ -53,9 +56,10 @@ export default function Home() {
               </h1>
               <div className="w-full">
                 <HoverBorderGradient
-                  as={Button}
+                  as={LinkButton}
                   containerClassName="mx-auto xl:mx-0 mt-10"
                   className="text-xl uppercase font-mono"
+                  href="/dashboard"
                 >
                   Get Started
                 </HoverBorderGradient>
@@ -81,7 +85,7 @@ export default function Home() {
       </div>
       <TracingBeam variant="orange">
         <div>
-          <div className="h-[200vh] mx-auto w-90% m-auto bg-background">
+          <div className="min-h-[120vh] mx-auto w-90% m-auto bg-background">
             <AppearingCard colour="silver">One</AppearingCard>
             <AppearingCard colour="gold" offset>
               More
@@ -89,7 +93,7 @@ export default function Home() {
             <AppearingCard colour="diamond">Thing...</AppearingCard>
           </div>
 
-          <div className="h-[60vh] relative mx-auto w-90% m-auto bg-background text-8xl font-bold flex justify-center items-center flex-col gap-4">
+          <div className="h-[100vh] relative mx-auto w-90% m-auto bg-background text-8xl font-bold flex justify-center items-center flex-col gap-4 z-30 text-center">
             {/* TODO: Change this to localised currency */}
             <p>It only costs</p>
             <p>
@@ -99,15 +103,22 @@ export default function Home() {
                 decimalPlaces={2}
                 startValue={100}
                 direction="up"
-                delay={0}
                 onFinish={handleTickerFinish}
               />
               <Confetti
                 ref={confettiRef}
                 manualstart
-                className="absolute left-0 top-0 size-full"
+                className="absolute left-0 top-0 w-full h-full overflow-visible"
               />
             </p>
+            <HoverBorderGradient
+              as={LinkButton}
+              href="/dashboard"
+              containerClassName="mx-auto xl:mx-0 mt-10"
+              className="text-xl uppercase font-mono"
+            >
+              Start saving
+            </HoverBorderGradient>
           </div>
         </div>
       </TracingBeam>

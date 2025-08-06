@@ -15,9 +15,10 @@ export default function TracingBeam({
   variant?: "orange" | "blue";
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const isOrange = variant === "orange";
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: [variant === "orange" ? "start center" : "start start", "end end"],
+    offset: [isOrange ? "start center" : "start start", "end end"],
   });
 
   const contentRef = useRef<HTMLDivElement>(null);
@@ -40,7 +41,7 @@ export default function TracingBeam({
     useTransform(
       scrollYProgress,
       [0, 1],
-      [0, variant === "blue" ? svgHeight : svgHeight - 200],
+      [0, !isOrange ? svgHeight : svgHeight - 200],
     ),
     {
       stiffness: 400,
@@ -51,16 +52,14 @@ export default function TracingBeam({
   return (
     <motion.div
       ref={ref}
-      className={cn("relative mx-auto h-full w-full", className, {
-        "pb-32": variant === "orange",
-      })}
+      className={cn("relative mx-auto h-full w-full", className, {})}
     >
       <div
-        className={cn("mobile-hidden absolute left-12 z-20 top-32 h-full", {
-          "right-20 left-auto": variant === "orange",
+        className={cn("mobile-hidden absolute left-12 z-50 top-32", {
+          "right-20 left-auto bottom-32": isOrange,
         })}
       >
-        {variant === "blue" && (
+        {!isOrange && (
           <div
             style={{
               boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
@@ -70,13 +69,13 @@ export default function TracingBeam({
             <div className="h-2 w-2 rounded-full border border-[#059669] bg-[#10b981]" />
           </div>
         )}
-        {variant === "orange" && (
+        {isOrange && (
           <div className="absolute -right-11 z-20 top-0 w-24 bg-orange-400 h-1 rounded-full shadow-[0_2px_10px_4px] shadow-orange-200 dark:shadow-orange-800"></div>
         )}
         <svg
           viewBox={`0 0 20 ${svgHeight}`}
           width="20"
-          height={svgHeight} // Set the SVG height
+          height={svgHeight - (isOrange ? 128 : 0)} // Set the SVG height, minus footer if orange
           className="ml-4 block"
           aria-hidden="true"
         >
@@ -116,7 +115,7 @@ export default function TracingBeam({
           </defs>
         </svg>
       </div>
-      {variant === "blue" && (
+      {!isOrange && (
         <div className="mobile-hidden absolute left-5 z-20 -bottom-36 w-24 bg-sky-400 h-1 rounded-full shadow-[0_2px_10px_4px] shadow-sky-200 dark:shadow-sky-800"></div>
       )}
       <div ref={contentRef}>{children}</div>

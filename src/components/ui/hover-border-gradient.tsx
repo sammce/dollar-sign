@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, JSX } from "react";
 
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
@@ -18,7 +18,15 @@ const movingMap: Record<Direction, string> = {
 const highlight =
   "radial-gradient(75% 181.15942028985506% at 50% 50%, #00c97f 0%, rgba(255, 255, 255, 0) 100%)";
 
-export function HoverBorderGradient({
+type HoverBorderGradientProps<P> = {
+  as?: React.ElementType<P> | keyof JSX.IntrinsicElements;
+  containerClassName?: string;
+  className?: string;
+  duration?: number;
+  clockwise?: boolean;
+} & P;
+
+export function HoverBorderGradient<P>({
   children,
   containerClassName,
   className,
@@ -26,15 +34,7 @@ export function HoverBorderGradient({
   duration = 1,
   clockwise = true,
   ...props
-}: React.PropsWithChildren<
-  {
-    as?: React.ElementType;
-    containerClassName?: string;
-    className?: string;
-    duration?: number;
-    clockwise?: boolean;
-  } & React.HTMLAttributes<HTMLElement>
->) {
+}: React.PropsWithChildren<HoverBorderGradientProps<P>>) {
   const [hovered, setHovered] = useState<boolean>(false);
   const [direction, setDirection] = useState<Direction>("TOP");
 
@@ -60,6 +60,7 @@ export function HoverBorderGradient({
   }, [hovered, duration, rotateDirection]);
 
   return (
+    // @ts-expect-error - You can call "button" or similar as jsx tag
     <Tag
       onMouseEnter={() => {
         setHovered(true);
