@@ -1,0 +1,30 @@
+{
+  "hero": {
+    "title": "Prendi il tuo controllo del tuo",
+    "rotatingWords": {
+      "first": "futuro",
+      "second": "shopping",
+      "third": "abbonamenti",
+      "fourth": "pranzi",
+      "fifth": "attività"
+    },
+    "buttonText": "Inizia"
+  },
+  "textReveal": "Tieni traccia delle tue entrate, spese e attività dalla stessa dashboard. ",
+  "macbook": {
+    "title": "Tutte le tue finanze in un unico posto",
+    "screen": {
+      "top": "Il momento migliore per iniziare a pianificare il futuro?",
+      "bottom": "Proprio adesso."
+    }
+  },
+  "cards": {
+    "first": "Uno",
+    "second": "Di più",
+    "third": "Cosa..."
+  },
+  "finalCTA": {
+    "title": "Costa solo",
+    "buttonText": "Inizia a salvare"
+  }
+}

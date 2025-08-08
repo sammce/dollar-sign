@@ -1,5 +1,3 @@
-export type SupportedLanguage = "en" | "fr";
-
-const supportedLanguages = ["en", "fr"] as SupportedLanguage[];
+const supportedLanguages = ["en", "de", "fr", "it"] as const;
 
 export default supportedLanguages;

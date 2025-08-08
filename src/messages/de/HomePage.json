@@ -1,0 +1,30 @@
+{
+  "hero": {
+    "title": "Übernehmen Sie die Kontrolle über Ihre",
+    "rotatingWords": {
+      "first": "Zukunft",
+      "second": "Einkaufen",
+      "third": "Abonnements",
+      "fourth": "Mittagessen",
+      "fifth": "Vermögenswerte"
+    },
+    "buttonText": "Fangen an"
+  },
+  "textReveal": "Verfolgen Sie Ihr Einkommen, Ihre Ausgaben und Ihr Vermögen aus demselben Dashboard. ",
+  "macbook": {
+    "title": "Alle Ihre Finanzen an einem Ort",
+    "screen": {
+      "top": "Die beste Zeit für die Planung für die Zukunft?",
+      "bottom": "Im Augenblick."
+    }
+  },
+  "cards": {
+    "first": "Eins",
+    "second": "Mehr",
+    "third": "Ding..."
+  },
+  "finalCTA": {
+    "title": "Es kostet nur",
+    "buttonText": "Sparen Sie an"
+  }
+}

@@ -252,7 +252,7 @@ export const Lid = ({
               style={{ opacity: textOpacity }}
               className="font-bold text-transparent bg-clip-text bg-gradient-to-b from-neutral-50 to-neutral-100 m-10 text-3xl md:text-4xl p-4 z-10"
             >
-              <span className="block w-[32rem] mx-auto">
+              <span className="block w-[28rem] mx-auto">
                 {t("macbook.screen.top")}
               </span>
               <br />

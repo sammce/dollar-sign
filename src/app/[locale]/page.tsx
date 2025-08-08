@@ -22,7 +22,7 @@ import {
 import { useMessages, useTranslations } from "next-intl";
 import { useCallback, useRef } from "react";
 
-export default function Home() {
+export default function HomePage() {
   const confettiRef = useRef<ConfettiRef>(null);
   const t = useTranslations("HomePage");
   const messages = useMessages().HomePage;
@@ -39,14 +39,14 @@ export default function Home() {
     <>
       <TracingBeam variant="blue">
         <HeroHighlight containerClassName="relative z-10">
-          <div className="flex items-center w-full gap-20 h-[80vh]">
+          <div className="flex items-center w-full gap-20 h-[80vh] pt-20">
             <div className="w-full">
               <h1 className="text-center xl:text-left text-5xl md:text-6xl xl:text-8xl font-bold min-w-[20rem] xl:min-w-[40rem]">
                 <span className="m-auto xl:ml-0 block max-w-80 md:max-w-96 xl:max-w-[36rem] break-words">
                   {t("hero.title")}
                 </span>
                 <ContainerTextFlip
-                  words={messages.hero.rotatingWords}
+                  words={Object.values(messages.hero.rotatingWords)}
                   className="mt-5 pt-1 xl:pt-0 pb-3 xl:pb-5"
                   textClassName="text-5xl md:text-6xl xl:text-8xl font-bold"
                   interval={4000}
@@ -80,11 +80,11 @@ export default function Home() {
       <TracingBeam variant="orange">
         <div>
           <div className="min-h-[120vh] mx-auto w-90% m-auto bg-background">
-            <AppearingCard colour="silver">{messages.cards[0]}</AppearingCard>
+            <AppearingCard colour="silver">{t("cards.first")}</AppearingCard>
             <AppearingCard colour="gold" offset>
-              {messages.cards[1]}
+              {t("cards.second")}
             </AppearingCard>
-            <AppearingCard colour="diamond">{messages.cards[2]}</AppearingCard>
+            <AppearingCard colour="diamond">{t("cards.third")}</AppearingCard>
           </div>
 
           <div className="h-[100vh] relative mx-auto w-90% m-auto bg-background text-6xl lg:text-8xl font-bold flex justify-center items-center flex-col gap-4 z-30 text-center">

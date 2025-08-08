@@ -1,0 +1,30 @@
+{
+  "hero": {
+    "title": "Prenez le contrôle de votre",
+    "rotatingWords": {
+      "first": "avenir",
+      "second": "achats",
+      "third": "abonnements",
+      "fourth": "déjeuners",
+      "fifth": "actifs"
+    },
+    "buttonText": "Commencer"
+  },
+  "textReveal": "Suivez vos revenus, vos dépenses et vos actifs du même tableau de bord. ",
+  "macbook": {
+    "title": "Tous vos finances au même endroit",
+    "screen": {
+      "top": "Le meilleur moment pour commencer à planifier l'avenir?",
+      "bottom": "Tout de suite."
+    }
+  },
+  "cards": {
+    "first": "Un",
+    "second": "Plus",
+    "third": "Chose..."
+  },
+  "finalCTA": {
+    "title": "Ça coûte seulement",
+    "buttonText": "Commencer à économiser"
+  }
+}

@@ -12,7 +12,6 @@ import "../globals.css";
 
 import { cookies } from "next/headers";
 import { Theme, themeStorageKey } from "@/stores";
-import { getMessages } from "next-intl/server";
 
 const ibm = IBM_Plex_Sans({
   variable: "--font-ibm-sans",
