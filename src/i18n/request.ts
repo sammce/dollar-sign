@@ -6,7 +6,7 @@ import fs from "fs";
 import path from "path";
 
 export function getMessages(locale: string) {
-  const dirPath = path.join(process.cwd(), "src", "messages", locale);
+  const dirPath = path.join(import.meta.filename, "..", "messages", locale);
   const messages: Record<string, unknown> = {};
 
   const files = fs.readdirSync(dirPath);
