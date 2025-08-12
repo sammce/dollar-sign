@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { ThemeSwitcher } from "@/components/ui";
+import ThemeSwitcher from "./theme-switcher";
+import LocaleSwitcher from "./locale-switcher";
+
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { SocialIcon } from "react-social-icons";
@@ -52,6 +54,7 @@ export default function Header() {
         </Link>
       </div>
       <div className="flex gap-6 items-center">
+        <LocaleSwitcher />
         <SocialIcon
           url="https://github.com/sammce/budget-tool"
           className="border rounded-full border-border shadow-xs hover:bg-accent/50 transition-colors bg-background dark:bg-input/30"

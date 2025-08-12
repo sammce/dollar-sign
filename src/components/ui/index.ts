@@ -11,6 +11,7 @@ export * from "./meteors";
 export * from "./text-reveal";
 export * from "./number-ticker";
 export * from "./confetti";
+export * from "./popover";
+export * from "./command";
 
-export { ThemeSwitcher } from "./theme-switcher";
 export { default as GridBackground } from "./grid-background";

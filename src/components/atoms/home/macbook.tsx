@@ -1,13 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import {
-  MotionValue,
-  motion,
-  useMotionTemplate,
-  useScroll,
-  useTransform,
-} from "motion/react";
+import { MotionValue, motion, useScroll, useTransform } from "motion/react";
 import { cn } from "@/lib/utils";
 import {
   IconBrightnessDown,
@@ -30,7 +24,6 @@ import {
   IconCaretLeftFilled,
   IconCaretDownFilled,
 } from "@tabler/icons-react";
-import { BackgroundGradientAnimation } from "@/components/ui";
 import { useIsMobile } from "@/hooks";
 import { useTranslations } from "next-intl";
 
@@ -81,16 +74,8 @@ export const MacbookScroll = ({
 
   const multiplier = isMobile ? 1.9 : 1.4;
 
-  const scaleX = useTransform(
-    scrollYProgress,
-    [0, 0.3],
-    [1.2, isMobile ? 1.5 : 1.5],
-  );
-  const scaleY = useTransform(
-    scrollYProgress,
-    [0, 0.3],
-    [0.6, isMobile ? 1.5 : 1.5],
-  );
+  const scaleX = useTransform(scrollYProgress, [0, 0.3], [1.2, 1.5]);
+  const scaleY = useTransform(scrollYProgress, [0, 0.3], [0.6, 1.5]);
   const translate = useTransform(
     scrollYProgress,
     [isMobile ? 0.1 : 0, 1],
@@ -153,18 +138,6 @@ export const MacbookScroll = ({
   );
 };
 
-const MotionAnimatedBackground = motion.create(BackgroundGradientAnimation);
-
-const gradientColours = {
-  gradientBackgroundStart: "rgb(27, 117, 61)",
-  gradientBackgroundEnd: "rgb(73, 179, 175)",
-  firstColor: "18, 204, 255",
-  secondColor: "221, 74, 255",
-  thirdColor: "100, 255, 192",
-  fourthColor: "102, 50, 200",
-  fifthColor: "180, 180, 50",
-};
-
 export const Lid = ({
   scaleX,
   scaleY,
@@ -182,33 +155,11 @@ export const Lid = ({
   const scrollBase = 0.2;
   const scrollIncrement = 0.05;
 
-  const gradientSize = useTransform(
-    scrollYProgress,
-    [scrollBase - scrollIncrement, scrollBase + 2 * scrollIncrement],
-    [0, 300],
-  );
   const screenOpacity = useTransform(
     scrollYProgress,
     [scrollBase - 2 * scrollIncrement, scrollBase + 2 * scrollIncrement],
     [0.2, 1],
   );
-  const gradientRadius = useTransform(
-    scrollYProgress,
-    [
-      scrollBase,
-      scrollBase + 3 * scrollIncrement,
-      scrollBase + 4 * scrollIncrement,
-    ],
-    [100, 60, 0],
-  );
-  const textOpacity = useTransform(
-    scrollYProgress,
-    [scrollBase - 2 * scrollIncrement, scrollBase + scrollIncrement],
-    [0, 1],
-  );
-
-  const height = useMotionTemplate`${gradientSize}%`;
-  const width = useMotionTemplate`calc(${gradientSize}% / 1.2)`;
 
   return (
     <div className="relative [perspective:800px]">
@@ -231,36 +182,16 @@ export const Lid = ({
           opacity: screenOpacity,
         }}
         className={cn(
-          "absolute inset-0 h-80 lg:h-96 w-full lg:w-[32rem] rounded-2xl bg-[#010101] backdrop-blur-lg border dark:border-neutral-800 drop-shadow-lg drop-shadow-emerald-700/40",
+          "absolute inset-0 h-80 lg:h-96 w-full lg:w-[32rem] rounded-2xl bg-gradient-to-b from-primary to-primary/50 backdrop-blur-lg border dark:border-neutral-800 drop-shadow-lg drop-shadow-emerald-700/40",
           "flex items-center justify-center overflow-hidden",
         )}
       >
-        <motion.div
-          style={{
-            width,
-            height,
-          }}
-        >
-          <MotionAnimatedBackground
-            containerClassName="w-full h-full"
-            className="flex items-center justify-center text-center h-full w-full shadow-lg shadow-emerald-500"
-            style={{ borderRadius: gradientRadius }}
-            size="250%"
-            {...gradientColours}
-          >
-            <motion.h1
-              style={{ opacity: textOpacity }}
-              className="font-bold text-transparent bg-clip-text bg-gradient-to-b from-neutral-50 to-neutral-100 m-10 text-3xl md:text-4xl p-4 z-10"
-            >
-              <span className="block w-[28rem] mx-auto">
-                {t("macbook.screen.top")}
-              </span>
-              <br />
-              <br />
-              {t("macbook.screen.bottom")}
-            </motion.h1>
-          </MotionAnimatedBackground>
-        </motion.div>
+        <h1 className="font-bold text-center text-transparent bg-clip-text bg-gradient-to-b from-neutral-50 to-neutral-100 text-3xl md:text-4xl max-w-[20rem] lg:max-w-auto z-10 py-2">
+          <span className="block mx-auto">{t("macbook.screen.top")}</span>
+          <br />
+          <br />
+          {t("macbook.screen.bottom")}
+        </h1>
       </motion.div>
     </div>
   );

@@ -30,7 +30,7 @@ const themeIcons: Record<Theme, React.ReactNode> = {
 /**
  * Allows switching themes via dropdown menu.
  */
-function ThemeSwitcher({ className }: { className?: string }) {
+export default function ThemeSwitcher({ className }: { className?: string }) {
   const { theme, setTheme } = useThemeStore();
   const [icon, setIcon] = useState<React.ReactNode>(null);
 
@@ -80,5 +80,3 @@ function ThemeSwitcher({ className }: { className?: string }) {
     </DropdownMenu>
   );
 }
-
-export { ThemeSwitcher };

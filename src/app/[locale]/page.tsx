@@ -79,7 +79,7 @@ export default function HomePage() {
       </div>
       <TracingBeam variant="orange">
         <div>
-          <div className="min-h-[120vh] mx-auto w-90% m-auto bg-background">
+          <div className="min-h-[120vh] mx-auto w-90% m-auto bg-background overflow-x-hidden">
             <AppearingCard colour="silver">{t("cards.first")}</AppearingCard>
             <AppearingCard colour="gold" offset>
               {t("cards.second")}
