@@ -2,29 +2,25 @@ import { getRequestConfig } from "next-intl/server";
 import { hasLocale } from "next-intl";
 import { routing } from "./routing";
 
-import fs from "fs";
-import path from "path";
+const JSON_FILES = ["HomePage"] as const;
 
-export function getMessages(locale: string) {
-  const dirPath = path.join(import.meta.filename, "..", "messages", locale);
-  const messages: Record<string, unknown> = {};
+type Messages<T extends string = (typeof JSON_FILES)[number]> = Record<
+  T,
+  Record<string, string>
+>;
 
-  const files = fs.readdirSync(dirPath);
+export async function getMessages(locale: string) {
+  const messages: Messages<string> = {};
 
-  for (const file of files) {
-    if (file.endsWith(".json")) {
-      const filePath = path.join(dirPath, file);
-      const content = JSON.parse(fs.readFileSync(filePath, "utf8"));
-
-      const namespace = path.basename(file, ".json");
-      messages[namespace] = content;
-    }
+  for (const file of JSON_FILES) {
+    messages[file] = (
+      await import(`../messages/${locale}/${file}.json`)
+    ).default;
   }
 
-  return messages;
+  return messages as Messages;
 }
 export default getRequestConfig(async ({ requestLocale }) => {
-  // Typically corresponds to the `[locale]` segment
   const requested = await requestLocale;
   const locale = hasLocale(routing.locales, requested)
     ? requested
@@ -32,6 +28,6 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
   return {
     locale,
-    messages: getMessages(locale),
+    messages: await getMessages(locale),
   };
 });
